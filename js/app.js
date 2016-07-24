@@ -32,7 +32,7 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
             //         }
             //     }
             // })
-            .state('tab.nav.advertisement', {
+            .state('tab.nav.advertisementPC', {
                 url: '/advertisement/{terminal}',
                 views: {
                     'resource_kind': {
@@ -41,7 +41,7 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
                     }
                 }
             })
-            .state('tab.nav.article', {
+            .state('tab.nav.articlePC', {
                 url: '/article/{terminal}',
                 views: {
                     'resource_kind': {
