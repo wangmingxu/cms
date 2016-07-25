@@ -19,7 +19,7 @@
     <span class="plan_name">计划名称：中山地区9.5折优惠公告</span>
     <span class="plan_time">展示时间：2016/6/23 15:39-不限</span>
     <p class="plan_area">投放区域：全国</p>
-    <button type="button" name="button" class="add_resource_btn">+添加资源位</button>
+    <button type="button" name="button" class="add_resource_btn" data-toggle="modal" data-target="#resourceModal" ng-click="getResource()">+添加资源位</button>
     <select class="select_platform">
         <option value="option">请选择平台</option>
         <option value="option">PC端</option>
@@ -44,43 +44,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="resource_name">账户管理</td>
-                <td class="resource_platform">PC端</td>
+            <tr ng-repeat="item in checked_resource">
+                <td class="resource_name">{{item.resourcePositionName}}</td>
+                <td class="resource_platform" ng-if="item.platform==1">PC端</td>
+                <td class="resource_platform" ng-if="item.platform==2">M站</td>
+                <td class="resource_platform" ng-if="item.platform==3">IOS端</td>
+                <td class="resource_platform" ng-if="item.platform==4">Android端</td>
                 <td class="resource_programa">PC帮助中心</td>
-                <td class="material_state not_selected">未选素材</td>
+                <td class="material_state not_selected" ng-if="!judge_hasSelect($index)">未选素材</td>
+                <td class="material_state" ng-if="judge_hasSelect($index)">已选素材</td>
                 <td class="operate">
-                    <span data-toggle="modal" data-target="#materialModal" ng-click="modal1()">选择素材</span>
-                    <span>删除</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="resource_name">购物流程</td>
-                <td class="resource_platform">PC端</td>
-                <td class="resource_programa">PC帮助中心</td>
-                <td class="material_state not_selected">未选素材</td>
-                <td class="operate">
-                    <span data-toggle="modal" data-target="#materialModal2">选择素材</span>
-                    <span>删除</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="resource_name">支付方式</td>
-                <td class="resource_platform">PC端</td>
-                <td class="resource_programa">PC帮助中心</td>
-                <td class="material_state not_selected">未选素材</td>
-                <td class="operate">
-                    <span data-toggle="modal" data-target="#materialModal3" ng-click="modal3()">选择素材</span>
-                    <span>删除</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="resource_name">支付方式</td>
-                <td class="resource_platform">PC端</td>
-                <td class="resource_programa">PC帮助中心</td>
-                <td class="material_state not_selected">未选素材</td>
-                <td class="operate">
-                    <span data-toggle="modal" data-target="#materialModal4">选择素材</span>
+                    <span data-toggle="modal" data-target="#selectPic_Modal" ng-click="show_picList($index)">选择素材</span>
                     <span>删除</span>
                 </td>
             </tr>
@@ -92,8 +66,70 @@
         <button type="button" name="button" class="cancel_btn">取消</button>
     </div>
 </div>
+<div class="modal fade" id="resourceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    资源位列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <select class="" name="">
+                    <option value="option">上传时间由近到远</option>
+                </select>
+                <input type="text" name="name" value="" placeholder="输入标题名称">
+                <div class="table-responsive">
+                    <table class="table material_table">
+                        <thead>
+                            <tr>
+                                <th>资源位</th>
+                                <th>平台</th>
+                                <th>素材类型</th>
+                                <th>尺寸</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="resource in resourceList">
+                                <td class="article_title">
+                                    <input type="checkbox" name="name" value="" ng-model="resource.isChecked">{{resource.resourcePositionName}}
+                                </td>
+                                <td class="" ng-if="resource.platform==1">PC</td>
+                                <td class="" ng-if="resource.platform==2">M站</td>
+                                <td class="" ng-if="resource.platform==3">IOS</td>
+                                <td class="" ng-if="resource.platform==4">Android</td>
+                                <td class="material_type">
+                                  图片
+                                </td>
+                                <td>
+                                  {{resource.pixelHeight}}X{{resource.pixelWidth}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="page_tab">
+                    <span>每页显示10行</span>
+                    <a>上一页</a>
+                    <span>1/2</span>
+                    <a>下一页</a>
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="resource_ensure()" data-dismiss="modal">确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--图片选择素材(未选素材）-->
-<div class="modal fade" id="materialModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="selectPic_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -112,7 +148,7 @@
                 </select>
                 <input type="text" name="name" value="" placeholder="输入素材名称">
                 <div class="well well-lg material_list">
-                    <div class="material_item" ng-repeat="item in arr1" ng-click="select_pic($index)" ng-class="checkSelect($index)">
+                    <div class="material_item" ng-repeat="item in temp_picList" ng-click="select_pic($index)" ng-class="SelectClass($index)">
                         <img ng-src="{{item.picUrl}}" alt="" />
                             <p class="img_name">
                                 {{item.materialName}}
@@ -121,7 +157,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="">下一步
+                <button type="button" class="btn btn-primary" ng-click="pic_next()">下一步
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     关闭
@@ -131,7 +167,7 @@
     </div>
 </div>
 <!--图片选择素材（已选素材编辑)-->
-<div class="modal fade" id="materialModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="editPic_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -170,7 +206,7 @@
                                 </td>
                                 <td class="serial_number">1</td>
                                 <td class="operate">
-                                    <span>删除</span>
+                                    <span>删除</span><span>下移</span><span>上移</span>
                                 </td>
                             </tr>
                             <tr>
@@ -183,7 +219,7 @@
                                 </td>
                                 <td class="serial_number">1</td>
                                 <td class="operate">
-                                    <span>删除</span>
+                                    <span>删除</span><span>下移</span><span>上移</span>
                                 </td>
                             </tr>
                             <tr>
@@ -196,7 +232,7 @@
                                 </td>
                                 <td class="serial_number">1</td>
                                 <td class="operate">
-                                    <span>删除</span>
+                                    <span>删除</span><span>下移</span><span>上移</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -204,7 +240,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">下一步
+                <button type="button" class="btn btn-primary" data-dismiss="modal">完成
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     关闭
@@ -214,7 +250,7 @@
     </div>
 </div>
 <!--文章选择素材（未选素材编辑）-->
-<div class="modal fade" id="materialModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="selectArticle_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -240,7 +276,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="article in arr3">
+                            <tr ng-repeat="article in articleList">
                                 <td class="article_title">
                                     <input type="checkbox" name="name" value="" ng-model="article.isChecked">{{article.title}}
                                 </td>
@@ -261,7 +297,7 @@
                     <span>1/2</span>
                     <a>下一页</a>
                 </div>
-                <button type="button" class="btn btn-primary" ng-click="test3()">下一步
+                <button type="button" class="btn btn-primary" ng-click="article_ensure()">下一步
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     取消
@@ -271,7 +307,7 @@
     </div>
 </div>
 <!--文章选择素材（已选素材编辑）-->
-<div class="modal fade" id="materialModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="editArticle_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

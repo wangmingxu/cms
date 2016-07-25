@@ -36,25 +36,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="resource_name">20160621首焦1油品专题</td>
-                <td class="update_time">2016/6/21 10:24:10</td>
-                <td class="publish_time">2016/6/21 10:24:10</td>
+            <tr ng-repeat="item in list">
+                <td class="resource_name">{{item.materialName}}</td>
+                <td class="update_time">{{item.updateTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td class="publish_time">{{item.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td class="operate">
                     <span>预览</span>
                     <span>编辑</span>
-                    <span>删除</span>
+                    <span ng-click="delete(item.materialId)">删除</span>
                 </td>
-            </tr>
-            <tr>
-              <td class="resource_name">20160621首焦1油品专题</td>
-              <td class="update_time">2016/6/21 10:24:10</td>
-              <td class="publish_time">2016/6/21 10:24:10</td>
-              <td class="operate">
-                  <span>预览</span>
-                  <span>编辑</span>
-                  <span>删除</span>
-              </td>
             </tr>
         </tbody>
     </table>

@@ -226,7 +226,8 @@ body {
       border: none;
       border-radius: 4px;
       outline: none;
-      background-color: #fff; }
+      background-color: #fff;
+      text-decoration: none; }
     .content .select_info select {
       margin-right: 25px; }
   .content .plan_table th, .content .material_table th, .content .resource_table th {
@@ -334,14 +335,15 @@ body {
         cursor: pointer; }
     .content .plan_form .showArea_ipt .area_ipt {
       position: relative;
-      margin-top: 15px; }
+      margin-top: 15px;
+      width: 200px; }
       .content .plan_form .showArea_ipt .area_ipt input {
         width: 200px;
         height: 30px; }
       .content .plan_form .showArea_ipt .area_ipt .select_area_btn {
         position: absolute;
         top: 1px;
-        right: 58px;
+        right: 1px;
         width: 70px;
         height: 28px;
         padding: 0;
@@ -456,22 +458,25 @@ body {
     .content .select_finish .cancel_btn {
       border: none;
       background-color: #fff; }
-  .content #materialModal .modal-title,
-  .content #materialModal2 .modal-title,
-  .content #materialModal3 .modal-title,
-  .content #materialModal4 .modal-title {
+  .content #resourceModal .modal-title,
+  .content #selectPic_Modal .modal-title,
+  .content #editPic_Modal .modal-title,
+  .content #selectArticle_Modal .modal-title,
+  .content #editArticle_Modal .modal-title {
     font-weight: bold; }
-  .content #materialModal .modal-body select,
-  .content #materialModal2 .modal-body select,
-  .content #materialModal3 .modal-body select,
-  .content #materialModal4 .modal-body select {
+  .content #resourceModal .modal-body select,
+  .content #selectPic_Modal .modal-body select,
+  .content #editPic_Modal .modal-body select,
+  .content #selectArticle_Modal .modal-body select,
+  .content #editArticle_Modal .modal-body select {
     height: 26px;
     width: 150px;
     margin-right: 20px; }
-  .content #materialModal .modal-body .material_list,
-  .content #materialModal2 .modal-body .material_list,
-  .content #materialModal3 .modal-body .material_list,
-  .content #materialModal4 .modal-body .material_list {
+  .content #resourceModal .modal-body .material_list,
+  .content #selectPic_Modal .modal-body .material_list,
+  .content #editPic_Modal .modal-body .material_list,
+  .content #selectArticle_Modal .modal-body .material_list,
+  .content #editArticle_Modal .modal-body .material_list {
     margin-top: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -482,53 +487,61 @@ body {
     flex-wrap: wrap;
     -ms-flex-line-pack: justify;
     align-content: space-between; }
-    .content #materialModal .modal-body .material_list .material_item,
-    .content #materialModal2 .modal-body .material_list .material_item,
-    .content #materialModal3 .modal-body .material_list .material_item,
-    .content #materialModal4 .modal-body .material_list .material_item {
+    .content #resourceModal .modal-body .material_list .material_item,
+    .content #selectPic_Modal .modal-body .material_list .material_item,
+    .content #editPic_Modal .modal-body .material_list .material_item,
+    .content #selectArticle_Modal .modal-body .material_list .material_item,
+    .content #editArticle_Modal .modal-body .material_list .material_item {
       width: 150px;
       margin-bottom: 10px;
       padding: 5px;
       border: 1px solid rgba(11, 11, 11, 0); }
-      .content #materialModal .modal-body .material_list .material_item img,
-      .content #materialModal2 .modal-body .material_list .material_item img,
-      .content #materialModal3 .modal-body .material_list .material_item img,
-      .content #materialModal4 .modal-body .material_list .material_item img {
+      .content #resourceModal .modal-body .material_list .material_item img,
+      .content #selectPic_Modal .modal-body .material_list .material_item img,
+      .content #editPic_Modal .modal-body .material_list .material_item img,
+      .content #selectArticle_Modal .modal-body .material_list .material_item img,
+      .content #editArticle_Modal .modal-body .material_list .material_item img {
         width: 138px;
         height: 90px; }
-      .content #materialModal .modal-body .material_list .material_item .img_name,
-      .content #materialModal2 .modal-body .material_list .material_item .img_name,
-      .content #materialModal3 .modal-body .material_list .material_item .img_name,
-      .content #materialModal4 .modal-body .material_list .material_item .img_name {
+      .content #resourceModal .modal-body .material_list .material_item .img_name,
+      .content #selectPic_Modal .modal-body .material_list .material_item .img_name,
+      .content #editPic_Modal .modal-body .material_list .material_item .img_name,
+      .content #selectArticle_Modal .modal-body .material_list .material_item .img_name,
+      .content #editArticle_Modal .modal-body .material_list .material_item .img_name {
         margin-bottom: 0;
         padding-top: 5px; }
-    .content #materialModal .modal-body .material_list .material_item_active,
-    .content #materialModal2 .modal-body .material_list .material_item_active,
-    .content #materialModal3 .modal-body .material_list .material_item_active,
-    .content #materialModal4 .modal-body .material_list .material_item_active {
+    .content #resourceModal .modal-body .material_list .material_item_active,
+    .content #selectPic_Modal .modal-body .material_list .material_item_active,
+    .content #editPic_Modal .modal-body .material_list .material_item_active,
+    .content #selectArticle_Modal .modal-body .material_list .material_item_active,
+    .content #editArticle_Modal .modal-body .material_list .material_item_active {
       border: 1px solid #6f8fff; }
-  .content #materialModal .modal-footer .page_tab,
-  .content #materialModal2 .modal-footer .page_tab,
-  .content #materialModal3 .modal-footer .page_tab,
-  .content #materialModal4 .modal-footer .page_tab {
+  .content #resourceModal .modal-footer .page_tab,
+  .content #selectPic_Modal .modal-footer .page_tab,
+  .content #editPic_Modal .modal-footer .page_tab,
+  .content #selectArticle_Modal .modal-footer .page_tab,
+  .content #editArticle_Modal .modal-footer .page_tab {
     width: 300px;
     float: left;
     text-align: left;
     font-size: 16px;
     line-height: 34px; }
-    .content #materialModal .modal-footer .page_tab a,
-    .content #materialModal .modal-footer .page_tab span,
-    .content #materialModal2 .modal-footer .page_tab a,
-    .content #materialModal2 .modal-footer .page_tab span,
-    .content #materialModal3 .modal-footer .page_tab a,
-    .content #materialModal3 .modal-footer .page_tab span,
-    .content #materialModal4 .modal-footer .page_tab a,
-    .content #materialModal4 .modal-footer .page_tab span {
+    .content #resourceModal .modal-footer .page_tab a,
+    .content #resourceModal .modal-footer .page_tab span,
+    .content #selectPic_Modal .modal-footer .page_tab a,
+    .content #selectPic_Modal .modal-footer .page_tab span,
+    .content #editPic_Modal .modal-footer .page_tab a,
+    .content #editPic_Modal .modal-footer .page_tab span,
+    .content #selectArticle_Modal .modal-footer .page_tab a,
+    .content #selectArticle_Modal .modal-footer .page_tab span,
+    .content #editArticle_Modal .modal-footer .page_tab a,
+    .content #editArticle_Modal .modal-footer .page_tab span {
       margin-right: 10px; }
-    .content #materialModal .modal-footer .page_tab a,
-    .content #materialModal2 .modal-footer .page_tab a,
-    .content #materialModal3 .modal-footer .page_tab a,
-    .content #materialModal4 .modal-footer .page_tab a {
+    .content #resourceModal .modal-footer .page_tab a,
+    .content #selectPic_Modal .modal-footer .page_tab a,
+    .content #editPic_Modal .modal-footer .page_tab a,
+    .content #selectArticle_Modal .modal-footer .page_tab a,
+    .content #editArticle_Modal .modal-footer .page_tab a {
       text-decoration: none; }
   .content .upload_form {
     margin-top: 20px;

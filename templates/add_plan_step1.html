@@ -26,25 +26,25 @@
                 <div class="start_end_time_ipt">
                     <p>
                         起
-                        <input type="date" name="startTime" value="">
-                        <input type="checkbox" name="name" id="immediately_online" ng-true-value="1" ng-flase-value="0" ng-model="immediately_online">
-                        <label for="immediately_online">立即上线</label>
+                        <input type="date" name="startTime" value="" ng-model="start_time">
+                        <!-- <input type="checkbox" name="name" id="immediately_online" ng-true-value="1" ng-flase-value="0" ng-model="immediately_online">
+                        <label for="immediately_online">立即上线</label> -->
                     </p>
                     <p>
                         止
-                        <input type="date" name="endTime" value="">
-                        <input type="checkbox" name="name" id="never_offline" ng-true-value="1" ng-flase-value="0" ng-model="never_offline">
-                        <label for="never_offline">永不下线</label>
+                        <input type="date" name="endTime" value="" ng-model="end_time">
+                        <!-- <input type="checkbox" name="name" id="never_offline" ng-true-value="1" ng-flase-value="0" ng-model="never_offline">
+                        <label for="never_offline">永不下线</label> -->
                     </p>
                 </div>
             </div>
             <div class="form_row">
                 <label for="">计划类型</label>
                 <div class="planType_ipt">
-                    <input type="radio" name="planType" value="type_adv" id="type_adv" ng-model="planType">
-                    <label for="type_adv">广告计划</label>
-                    <input type="radio" name="planType" value="type_article" id="type_art" ng-model="planType">
-                    <label for="type_art">文章计划</label>
+                    <!-- <input type="radio" name="planType" value="type_adv" id="type_adv" ng-model="planType"> -->
+                    <label for="type_adv" ng-if="planType==1">广告计划</label>
+                    <!-- <input type="radio" name="planType" value="type_article" id="type_art" ng-model="planType"> -->
+                    <label for="type_art" ng-if="planType==2">文章计划</label>
                 </div>
             </div>
             <div class="form_row">
@@ -61,20 +61,15 @@
                 <label for="">展示地区</label>
                 <div class="showArea_ipt">
                     <div class="area_selected_list">
-                        <div class="area_item">
+                        <div class="area_item" ng-repeat="area in administration_area" ng-if="adminAreaName_select(area.provinceID)">   <!--ID-->
                             <span class="area_icon">行</span>
-                            中山
-                            <span class="del_area">x</span>
+                            {{area.provinceName}}
+                            <span class="del_area" ng-click="del_adminArea(area.provinceID)">x</span>
                         </div>
-                        <div class="area_item">
-                            <span class="area_icon">行</span>
-                            广州
-                            <span class="del_area">x</span>
-                        </div>
-                        <div class="area_item">
-                            <span class="area_icon">行</span>
-                            上海
-                            <span class="del_area">x</span>
+                        <div class="area_item" ng-repeat="province in service_area" ng-if="serviceAreaName_select(province.provinceId)"> <!--id-->
+                            <span class="area_icon">服</span>
+                            {{province.provinceName}}
+                            <span class="del_area" ng-click="del_serviceArea($index)">x</span>
                         </div>
                     </div>
                     <div class="area_ipt">
@@ -93,9 +88,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div class="area_selected">
+                    <!-- <div class="area_selected">
                         已选地区:
-                    </div>
+                    </div> -->
 
                     <div>
                         <ul class="nav nav-tabs" role="tablist">
@@ -111,7 +106,7 @@
                             <div role="tabpanel" class="tab-pane active" id="administration_area">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-md-2 area_name" ng-repeat="area in administration_area" ng-click="select_item($index)" ng-class="checkSelectArea($index)">{{ area.provinceName }}</div>
+                                        <div class="col-md-2 area_name" ng-repeat="area in administration_area" ng-click="select_item($index)" ng-class="AreaClass($index)">{{ area.provinceName }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +114,7 @@
                                 <ul>
                                 <li ng-repeat="province in service_area">
                                     <label for="{{province.provinceName}}">
-                                      <input type="checkbox" name="{{province[0].provinceName}}" value="{{$index}}" id="{{province.provinceName}}" ng-model="service_area[$index].isSelect">区域{{$index+1}}：{{province.provinceName}}（
+                                      <input type="checkbox" name="{{province[0].provinceName}}" value="{{$index}}" id="{{province.provinceName}}" ng-model="serviceArea_selectIndex[$index]">区域{{$index+1}}：{{province.provinceName}}（
                                       <span ng-repeat="city in province.cityNameList">
                                         <span ng-if="$index<province.cityNameList.length-1">{{city}}、</span>
                                         <span ng-if="$index==province.cityNameList.length-1">{{city}}</span>

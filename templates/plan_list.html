@@ -6,7 +6,7 @@
 <span class="back"><<返回上一级</span>
 </h1>
 <div class="select_info">
-<button type="button" name="button" class="add_plan_btn"  ui-sref="tab.planEntrance.addPlanStep1">+添加计划</button>
+<button type="button" name="button" class="add_plan_btn" ng-click="toAddPlan()">+添加计划</button>
 <select class="select_planState">
     <option value="">请选择计划状态</option>
     <option value="option">未开始</option>
@@ -47,34 +47,19 @@
             <td class="state" ng-switch-when="4">
               <img src="img/end.png" alt="" class="state_img" />已结束
             </td>
-            <td class="plan_name">{{item.planName}}</td>
+            <td class="plan_name">{{item.showPlanName}}</td>
             <td class="source_name">{{item.resourceName}}</td>
             <td class="start_end_time">
-                <p>起：{{item.startTime}}</p>
-                <p>止：{{item.stopTime}}</p>
+                <p>起：{{item.displayBeginTime}}</p>
+                <p>止：{{item.displayEndTime}}</p>
             </td>
             <td class="use_area">{{item.area}}</td>
-            <td class="priority">{{item.youxianji}}</td>
+            <td class="priority">{{item.priority}}</td>
             <td class="operate">
                 <span>编辑</span>
                 <span>删除</span>
             </td>
         </tr>
-        <!-- <tr>
-            <td class="state"><img src="img/ongoing.png" alt="" class="state_img" />进行中</td>
-            <td class="plan_name">20160621首焦1油品专题</td>
-            <td class="source_name">PC首页焦点图1</td>
-            <td class="start_end_time">
-                <p>起：2016/6/21</p>
-                <p>止：不限</p>
-            </td>
-            <td class="use_area">中山</td>
-            <td class="priority">1</td>
-            <td class="operate">
-                <span>编辑</span>
-                <span>删除</span>
-            </td>
-        </tr> -->
     </tbody>
 </table>
 <div class="table_footer">

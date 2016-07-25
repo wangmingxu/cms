@@ -221,6 +221,7 @@ body {
             border-radius: 4px;
             outline: none;
             background-color: #fff;
+            text-decoration: none;
         }
         select {
             margin-right: 25px;
@@ -368,6 +369,7 @@ body {
             .area_ipt {
                 position: relative;
                 margin-top: 15px;
+                width: 200px;
                 input {
                     width: 200px;
                     height: 30px;
@@ -375,7 +377,7 @@ body {
                 .select_area_btn {
                     position: absolute;
                     top: 1px;
-                    right: 58px;
+                    right: 1px;
                     width: 70px;
                     height: 28px;
                     padding: 0;
@@ -514,10 +516,11 @@ body {
         }
     }
     /*素材选择模态框*/
-    #materialModal,
-    #materialModal2,
-    #materialModal3,
-    #materialModal4 {
+    #resourceModal,
+    #selectPic_Modal,
+    #editPic_Modal,
+    #selectArticle_Modal,
+    #editArticle_Modal {
         .modal-title {
             font-weight: bold;
         }

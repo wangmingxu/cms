@@ -13,8 +13,8 @@
     </select>
     <select class="select_sourceName">
         <option selected="" value="请选择资源位...">请选择素材尺寸</option>
-        <option value="PC端首页焦点图1">760X450</option>
-        <option value="移动端首页焦点图1">1920X80</option>
+        <option value="">760X450</option>
+        <option value="">1920X80</option>
     </select>
     <select class="">
         <option value="option">请选择排序方式</option>
@@ -40,32 +40,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="resource_name">20160621首焦1油品专题</td>
-                <td class="resource_type">图片</td>
-                <td class="resource_measure">760X450</td>
-                <td class="resource_size">128K</td>
+            <tr ng-repeat="item in list">
+                <td class="resource_name">{{item.materialName}}</td>
+                <td class="resource_type" ng-if="item.materialType==1">图片</td>
+                <td class="resource_measure">{{item.pixelHeight}}X{{item.pixelWidth}}</td>
+                <td class="resource_size">{{item.fileSize}}K</td>
                 <td class="resource_link">
-                    <a href="#">http://www.qipeipu.com/serviceUpgrade.html</a>
+                    <a ng-href="{{item.targetUrl}}">{{item.targetUrl}}</a>
                 </td>
-                <td class="uploadtime">2016/6/21 10:24:10</td>
+                <td class="uploadtime">{{item.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td class="operate">
                     <span>编辑</span>
-                    <span>删除</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="resource_name">20160621首焦1油品专题</td>
-                <td class="resource_type">图片</td>
-                <td class="resource_measure">760X450</td>
-                <td class="resource_size">128K</td>
-                <td class="resource_link">
-                    <a href="#">http://www.qipeipu.com/serviceUpgrade.html</a>
-                </td>
-                <td class="uploadtime">2016/6/21 10:24:10</td>
-                <td class="operate">
-                    <span>编辑</span>
-                    <span>删除</span>
+                    <span ng-click="delete(item.materialId)">删除</span>
                 </td>
             </tr>
         </tbody>

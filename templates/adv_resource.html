@@ -2,15 +2,18 @@
 <div class="content">
 <h1>
     资源位管理
-    <span class="children_name">当前位置：PC端--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==1">当前位置：PC端--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==2">当前位置：M站--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==3">当前位置：IOS端--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==4">当前位置：Android端--首页--广告资源位</span>
     <span class="back">返回上一级</span>
 </h1>
 <div class="select_info">
     <button type="button" name="button" class="add_plan_btn">+添加资源位</button>
     <select class="select_sourceName">
         <option selected="" value="请选择资源位...">请选择资源位尺寸</option>
-        <option value="PC端首页焦点图1">760X450</option>
-        <option value="移动端首页焦点图1">1920X80</option>
+        <option value="">760X450</option>
+        <option value="">1920X80</option>
     </select>
     <input type="text" name="name" value="" placeholder="资源位名称检索">
 </div>
@@ -23,21 +26,22 @@
                 <th>展示平台</th>
                 <th>素材类型</th>
                 <th>素材尺寸</th>
-                <th>素材大小</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
-            <tr  ng-repeat="item in list">
-                <td class="resource_name">{{item.resourceName}}</td>
+            <tr  ng-repeat="item in list" ng-if="item.platform==platform">
+                <td class="resource_name">{{item.resourcePositionName}}</td>
                 <td class="update_time">预览</td>
-                <td class="publish_time">{{item.platform}}</td>
+                <td class="publish_time" ng-if="platform==1">PC</td>
+                <td class="publish_time" ng-if="platform==2">M站</td>
+                <td class="publish_time" ng-if="platform==3">Android</td>
+                <td class="publish_time" ng-if="platform==4">IOS</td>
                 <td class="">图片</td>
-                <td class="">{{item.width}}X{{item.height}}</td>
-                <td class="">{{item.size}}</td>
+                <td class="">{{item.pixelHeight}}X{{item.pixelWidth}}</td>
                 <td class="operate">
                     <span>编辑</span>
-                    <span>删除</span>
+                    <span ng-click="delete(item.resourcePositionId)">删除</span>
                 </td>
             </tr>
         </tbody>

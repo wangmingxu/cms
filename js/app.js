@@ -32,8 +32,8 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
             //         }
             //     }
             // })
-            .state('tab.nav.advertisementPC', {
-                url: '/advertisement/{terminal}',
+            .state('tab.nav.advertisement', {
+                url: '/advertisement/{platform}',
                 views: {
                     'resource_kind': {
                         templateUrl: 'templates/adv_resource.html',
@@ -41,11 +41,12 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
                     }
                 }
             })
-            .state('tab.nav.articlePC', {
-                url: '/article/{terminal}',
+            .state('tab.nav.article', {
+                url: '/article/{platform}',
                 views: {
                     'resource_kind': {
                         templateUrl: 'templates/article_resource.html',
+                        controller:"articleResourceCtrl"
                     }
                 }
             })
@@ -54,20 +55,21 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
                 views: {
                     'content': {
                         templateUrl: 'templates/plan_entrance.html',
+                        controller:'planEntranceCtrl'
                     }
                 }
             })
-            .state('tab.planEntrance.advPlan', {                      //为了保存tab->planEntrance的选中状态，这里要把advPlan作为planEntrance的子状态
-                url: '^/tab/advPlan',
+            .state('tab.planEntrance.planList', {                      //为了保存tab->planEntrance的选中状态，这里要把advPlan作为planEntrance的子状态
+                url: '^/tab/planList/{planType}',
                 views: {
                     'content@tab': {
-                        templateUrl: 'templates/adv_plan.html',        //@tab表示使用的是tab的模板（tabs.html），即把tabs.html中的 <div ui-view="content"></div>替换
-                        controller:'advPlanCtrl'
+                        templateUrl: 'templates/plan_list.html',        //@tab表示使用的是tab的模板（tabs.html），即把tabs.html中的 <div ui-view="content"></div>替换
+                        controller:'planListCtrl'
                     }
                 }
             })
             .state('tab.planEntrance.addPlanStep1', {
-                url: '^/tab/addPlanStep1',
+                url: '^/tab/addPlanStep1/{planType}',
                 views: {
                     'content@tab': {
                         templateUrl: 'templates/add_plan_step1.html',
@@ -97,6 +99,7 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
                 views: {
                     'content@tab': {
                         templateUrl: 'templates/pic_material.html',
+                        controller:'picMaterialCtrl'
                     }
                 }
             })
@@ -105,6 +108,7 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
                 views: {
                     'content@tab': {
                         templateUrl: 'templates/article_material.html',
+                        controller:'articleMaterialCtrl'
                     }
                 }
             })
