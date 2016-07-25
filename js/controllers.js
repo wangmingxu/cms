@@ -116,18 +116,20 @@ angular.module('starter.controllers', [])
                 console.log(data);
             });
     $scope.cacheIpt = function(cache) {
+        // var start_time = $filter("date")($scope.start_time, "yyyy-MM-dd");
+        // var end_time = $filter("date")($scope.end_time, "yyyy-MM-dd");
+        var start_time=$scope.start_time;
+        var end_time=$scope.end_time;
+        var admin_isSelect = JSON.stringify($scope.admin_isSelect);
+        var serviceArea_selectIndex = JSON.stringify($scope.serviceArea_selectIndex);
+        var serviceArea_isSelect = JSON.stringify($scope.serviceArea_isSelect);
         cache.put('planName', $scope.planName);
-        var start_time = $filter("date")($scope.start_time, "yyyy-MM-dd");
-        var end_time = $filter("date")($scope.end_time, "yyyy-MM-dd");
         cache.put('start_time', start_time);
         cache.put('end_time', end_time);
         cache.put('planType', $scope.planType);
         cache.put('priority', $scope.priority);
-        var admin_isSelect = JSON.stringify($scope.admin_isSelect);
         cache.put('admin_isSelect', admin_isSelect);
-        var serviceArea_selectIndex = JSON.stringify($scope.serviceArea_selectIndex);
         cache.put('serviceArea_selectIndex', serviceArea_selectIndex);
-        var serviceArea_isSelect = JSON.stringify($scope.serviceArea_isSelect);
         cache.put('serviceArea_isSelect', serviceArea_isSelect);
     };
     $scope.toStep2 = function() {
@@ -202,14 +204,15 @@ angular.module('starter.controllers', [])
     // console.log(JSON.parse(cache.get('admin_isSelect')));
     // console.log(JSON.parse(cache.get('serviceArea_isSelect')));
     // console.log(cache.get('start_time'));
-    $("[data-toggle='popover']").popover();
+    // $("[data-toggle='popover']").popover();
+    $scope.planName=cache.get('planName');
     $scope.getPic = function() {
         var _url = prefix + "MaterialList";
         Mock.mock(_url, {
             'list|6-10': [{
                 'id|+1': 1,
                 'picUrl': "img/defaultimg.png",
-                'materialName': '素材名素材名素素材名素材名...',
+                'materialName|1': ['素材名素材名素素材名素材名1...','素材名素材名素素材名素材名2...','素材名素材名素素材名素材名3...','素材名素材名素素材名素材名4...'],
             }]
         });
         $http({
@@ -289,10 +292,36 @@ angular.module('starter.controllers', [])
         }
     };
     $scope.pic_next = function() {
-        console.log($scope.temp_picList);
-        //each ischecked
+        // var i=$scope.temp_index;
+        // $scope.checked_resource[i].picList=$scope.temp_picList;
+        $scope.temp_picList_next=[];
+        $scope.temp_picList.map(function(item, i) {
+          if(item.isSelect){
+            $scope.temp_picList_next.push(item);
+          }
+        });
+        console.log($scope.temp_picList_next);
         $('#selectPic_Modal').modal('hide');
         $('#editPic_Modal').modal('show');
+    };
+    $scope.swapItems=function(arr,index1,index2){
+      arr[index1]=arr.splice(index2,1,arr[index1])[0];
+      return arr;
+    };
+    $scope.move_up=function(arr,$index){
+      if($index==0){
+        return;
+      }
+      $scope.swapItems(arr,$index,$index-1);
+    };
+    $scope.move_down=function(arr,$index){
+      if($index==arr.length-1){
+        return;
+      }
+      $scope.swapItems(arr,$index,$index+1);
+    };
+    $scope.pic_finish=function(){
+
     };
     $scope.getArticle = function() {
         var _url = prefix + "MaterialList";

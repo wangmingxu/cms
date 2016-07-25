@@ -16,8 +16,8 @@
     </div>
 </div>
 <div class="plan_info">
-    <span class="plan_name">计划名称：中山地区9.5折优惠公告</span>
-    <span class="plan_time">展示时间：2016/6/23 15:39-不限</span>
+    <span class="plan_name">计划名称：{{planName}}</span>
+    <span class="plan_time">展示时间：{{start_time}}-{{end_time}}</span>
     <p class="plan_area">投放区域：全国</p>
     <button type="button" name="button" class="add_resource_btn" data-toggle="modal" data-target="#resourceModal" ng-click="getResource()">+添加资源位</button>
     <select class="select_platform">
@@ -196,43 +196,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="pic_title">轮播1</td>
+                            <tr ng-repeat="item in temp_picList_next">
+                                <td class="pic_title">{{item.materialName}}</td>
                                 <td class="preview">
-                                    <a href="#"  data-toggle="popover" data-trigger="hover" data-content="<img src='img/defaultimg.png' width='250'>" data-placement="bottom" data-html="true">预览</a>
+                                    <a href="#"  data-toggle="popover" data-trigger="hover" data-content="<img src='{{item.picUrl}}' width='250'>" data-placement="bottom" data-html="true">预览</a>
                                 </td>
                                 <td class="link_preview">
                                     <a href="#">预览</a>
                                 </td>
-                                <td class="serial_number">1</td>
+                                <td class="serial_number">{{$index}}</td>
                                 <td class="operate">
-                                    <span>删除</span><span>下移</span><span>上移</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pic_title">轮播2</td>
-                                <td class="preview">
-                                    <a href="#">预览</a>
-                                </td>
-                                <td class="link_preview">
-                                    <a href="#">预览</a>
-                                </td>
-                                <td class="serial_number">1</td>
-                                <td class="operate">
-                                    <span>删除</span><span>下移</span><span>上移</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pic_title">轮播3</td>
-                                <td class="preview">
-                                    <a href="#">预览</a>
-                                </td>
-                                <td class="link_preview">
-                                    <a href="#">预览</a>
-                                </td>
-                                <td class="serial_number">1</td>
-                                <td class="operate">
-                                    <span>删除</span><span>下移</span><span>上移</span>
+                                    <span>删除</span><span ng-click="move_down(temp_picList_next,$index)">下移</span><span ng-click="move_up(temp_picList_next,$index)">上移</span>
                                 </td>
                             </tr>
                         </tbody>
