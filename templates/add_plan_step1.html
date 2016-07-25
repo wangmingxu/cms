@@ -1,0 +1,142 @@
+<!-- 新建计划——步骤一-->
+<div class="content">
+    <h1>新建计划</h1>
+    <div class="addplan_step">
+        <div class="step active_step">
+            <span>1</span>
+            计划基本信息
+        </div>
+        <div class="step">
+            <span>2</span>
+            选择资源位及素材匹配
+        </div>
+        <div class="step">
+            <span>3</span>
+            完成
+        </div>
+    </div>
+    <form class="" action="" method="" name="planForm">
+        <div class="plan_form">
+            <div class="form_row">
+                <label for="">计划名称</label>
+                <input type="text" name="planName" value="" class="planName_ipt" ng-model="planName">
+            </div>
+            <div class="form_row">
+                <label for="">展示时间</label>
+                <div class="start_end_time_ipt">
+                    <p>
+                        起
+                        <input type="date" name="startTime" value="">
+                        <input type="checkbox" name="name" id="immediately_online" ng-true-value="1" ng-flase-value="0" ng-model="immediately_online">
+                        <label for="immediately_online">立即上线</label>
+                    </p>
+                    <p>
+                        止
+                        <input type="date" name="endTime" value="">
+                        <input type="checkbox" name="name" id="never_offline" ng-true-value="1" ng-flase-value="0" ng-model="never_offline">
+                        <label for="never_offline">永不下线</label>
+                    </p>
+                </div>
+            </div>
+            <div class="form_row">
+                <label for="">计划类型</label>
+                <div class="planType_ipt">
+                    <input type="radio" name="planType" value="type_adv" id="type_adv" ng-model="planType">
+                    <label for="type_adv">广告计划</label>
+                    <input type="radio" name="planType" value="type_article" id="type_art" ng-model="planType">
+                    <label for="type_art">文章计划</label>
+                </div>
+            </div>
+            <div class="form_row">
+                <label for="">优先级</label>
+                <select name="" class="priority_ipt" ng-model="priority">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form_row">
+                <label for="">展示地区</label>
+                <div class="showArea_ipt">
+                    <div class="area_selected_list">
+                        <div class="area_item">
+                            <span class="area_icon">行</span>
+                            中山
+                            <span class="del_area">x</span>
+                        </div>
+                        <div class="area_item">
+                            <span class="area_icon">行</span>
+                            广州
+                            <span class="del_area">x</span>
+                        </div>
+                        <div class="area_item">
+                            <span class="area_icon">行</span>
+                            上海
+                            <span class="del_area">x</span>
+                        </div>
+                    </div>
+                    <div class="area_ipt">
+                        <input type="text" name="name" value="" placeholder="请选择或输入">
+                        <button type="button" name="button" class="select_area_btn" data-toggle="modal" data-target="#areaModal" ng-click="selectArea()">选择+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ipt_finish">
+                <button type="button" name="button" class="next_step_btn" ng-click="toStep2()" ng-disabled='planForm.planName.$pristine'>下一步</button>
+                <button type="button" name="button" class="cancel_btn">取消</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal fade" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="area_selected">
+                        已选地区:
+                    </div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#administration_area" aria-controls="administration_area" role="tab" data-toggle="tab">行政区域</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#service_area" aria-controls="service_area" role="tab" data-toggle="tab">服务区域</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="administration_area">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-2 area_name" ng-repeat="area in administration_area" ng-click="select_item($index)" ng-class="checkSelectArea($index)">{{ area.provinceName }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="service_area">
+                                <ul>
+                                <li ng-repeat="province in service_area">
+                                    <label for="{{province.provinceName}}">
+                                      <input type="checkbox" name="{{province[0].provinceName}}" value="{{$index}}" id="{{province.provinceName}}" ng-model="service_area[$index].isSelect">区域{{$index+1}}：{{province.provinceName}}（
+                                      <span ng-repeat="city in province.cityNameList">
+                                        <span ng-if="$index<province.cityNameList.length-1">{{city}}、</span>
+                                        <span ng-if="$index==province.cityNameList.length-1">{{city}}</span>
+                                      </span>）
+                                    </label>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="ensure_area()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

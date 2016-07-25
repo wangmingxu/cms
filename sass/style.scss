@@ -1,0 +1,674 @@
+@import './reset.scss';
+$left-nav-color: rgba(42, 42, 42, 1);
+$left-nav2-color: rgba(242, 242, 242, 1);
+$left-nav-width: 225px;
+$left-nav2-width: 200px;
+$type-advertisement-color: rgba(255, 223, 37, 1);
+$type-article-color: rgba(54, 169, 206, 1);
+$type-picSrc-color: rgb(54, 169, 206);
+$type-articleSrc-color: rgb(239, 90, 161);
+@mixin nav($width,$bgColor) {
+    float: left;
+    width: $width;
+    height: 100vh;
+    text-align: center;
+    color: #fff;
+    background-color: $bgColor;
+}
+@mixin entrance_type($plan-type-bgcolor) {
+    display: table-cell;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    background-color: $plan-type-bgcolor;
+    box-shadow: 5px 5px 5px #888;
+}
+@mixin step_btn {
+    width: 60px;
+    height: 28px;
+    border: 1px solid rgba(215, 215, 215, 1);
+    border-radius: 5px;
+    background-color: rgba(242, 242, 242, 1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .349019607843137);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .349019607843137);
+}
+@mixin cancel_btn {
+    border: none;
+    background-color: #fff;
+}
+.hide {
+    display: none;
+}
+body {
+    background-color: rgba(255, 255, 255, 1);
+}
+/*左侧导航栏*/
+.left-nav {
+    @include nav($left-nav-width,$left-nav-color);
+    .logo_container {
+        margin-bottom: 20px;
+        padding: 25px;
+        .logo {
+            width: 150px;
+            height: 40px;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+        .welcome {
+            font-size: 16px;
+            span {
+                cursor: pointer;
+                color: #999;
+            }
+        }
+    }
+    .item_list_container {
+        @-webkit-keyframes item_to_right {
+            from {
+                -webkit-transform: translateX(0px);
+                transform: translateX(0px);
+            }
+            to {
+                -webkit-transform: translateX(10px);
+                transform: translateX(10px);
+            }
+        }
+        @keyframes item_to_right {
+            from {
+                -webkit-transform: translateX(0px);
+                transform: translateX(0px);
+            }
+            to {
+                -webkit-transform: translateX(10px);
+                transform: translateX(10px);
+            }
+        }
+        .item_list {
+            font-weight: bold;
+            line-height: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        .item_active,
+        .item_list:hover {
+            background-color: #2a80b9;
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+            -webkit-animation: item_to_right 0.5s;
+            animation: item_to_right 0.5s;
+        }
+    }
+}
+/*左侧二级导航栏*/
+.left-nav2 {
+    @include nav($left-nav2-width,$left-nav2-color);
+    color: rgb(13, 13, 13);
+    border-right: 1px solid #B6B6B6;
+    padding: 20px 45px;
+    .nav_item {
+        margin-bottom: 20px;
+        .terminal_PC {
+            background: url("../../img/PC.png");
+        }
+        .terminal_M {
+            background: url("../../img/M.png");
+        }
+        .terminal_IOS {
+            background: url("../../img/IOS.png");
+        }
+        .terminal_Android {
+            background: url("../../img/Android.png");
+        }
+        .terminal {
+            line-height: 30px;
+            padding-left: 40px;
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+            background-position: left center;
+            width: 100px;
+            text-align: left;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        ul {
+            .active a {
+                color: rgb(86, 171, 228);
+                font-weight: bold;
+            }
+            li {
+                margin-bottom: 10px;
+                cursor: pointer;
+                a {
+                    color: #0D0D0D;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+/*右侧内容主体*/
+.content {
+    overflow: hidden;
+    padding: 25px;
+    .center {
+        text-align: center;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+        .children_name {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        .back {
+            font-size: 14px;
+            font-weight: 400;
+            float: right;
+            cursor: pointer;
+        }
+    }
+    /*计划类型入口*/
+    .plan_type_select {
+        padding-top: 100px;
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .type_container {
+            overflow: hidden;
+            width: 460px;
+            margin: 0 auto;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            .type_wrapper {
+                float: left;
+                &:first-of-type {
+                    margin-right: 150px;
+                }
+                .type_advertisement_plan {
+                    @include entrance_type($type-advertisement-color);
+                }
+                .type_article_plan {
+                    @include entrance_type($type-article-color);
+                }
+                .type_picture_src {
+                    @include entrance_type($type-picSrc-color);
+                }
+                .type_article_src {
+                    @include entrance_type($type-articleSrc-color);
+                }
+            }
+        }
+    }
+    /*筛选信息*/
+    .select_info {
+        padding: 18px;
+        background-color: #e4e4e4;
+        margin-top: 10px;
+        .add_plan_btn {
+            margin-right: 25px;
+            color: #666;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            background-color: #fff;
+        }
+        select {
+            margin-right: 25px;
+        }
+    }
+    /*计划表格*/
+    .plan_table {
+        th {
+            text-align: center;
+            font-size: 16px;
+        }
+        td {
+            line-height: 28px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .state {
+            .state_img {
+                width: 28px;
+                height: 28px;
+                -webkit-transform: translate(-3px,-2px);
+                transform: translate(-3px,-3px);
+            }
+        }
+        .start_end_time {
+            padding-top: 0;
+            padding-bottom: 0;
+            p {
+                margin-bottom: 0;
+            }
+        }
+        .operate {
+            span {
+                cursor: pointer;
+                margin-right: 20px;
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    .table_footer {
+        font-size: 16px;
+        .tab_page {
+            float: right;
+            .previous_page {
+                margin-right: 20px;
+                cursor: pointer;
+            }
+            .next_page {
+                margin-left: 20px;
+                cursor: pointer;
+            }
+            .page_num {
+                font-weight: bold;
+            }
+            [name='page_num_ipt'] {
+                width: 40px;
+                height: 25px;
+            }
+            .jump {
+                margin-left: 20px;
+                cursor: pointer;
+            }
+        }
+    }
+    /*添加计划*/
+    .addplan_step {
+        overflow: hidden;
+        margin: 30px 0;
+        .step {
+            font-size: 16px;
+            float: left;
+            margin-right: 25px;
+            color: #ccc;
+            span {
+                line-height: 28px;
+                display: inline-block;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                color: #fdfffe;
+                border-radius: 50% 50%;
+                background-color: #e4e4e4;
+            }
+        }
+        .active_step {
+            color: #333;
+            span {
+                color: #fff;
+                background-color: #333;
+            }
+        }
+    }
+    /*添加计划步骤一*/
+    .plan_form {
+        .form_row {
+            label {
+                line-height: 26px;
+                width: 90px;
+                text-align: center;
+            }
+            .planType_ipt,
+            .showArea_ipt,
+            .start_end_time_ipt {
+                display: inline-block;
+                vertical-align: top;
+                label {
+                    text-align: left;
+                }
+                [type='checkbox'],
+                [type='radio'] {
+                    vertical-align: sub;
+                }
+            }
+        }
+        .planName_ipt {
+            input {
+                width: 300px;
+            }
+        }
+        .priority_ipt {
+            width: 100px;
+        }
+        .showArea_ipt {
+            padding: 3px;
+            .area_item {
+                line-height: 20px;
+                display: inline-block;
+                margin-right: 20px;
+                .area_icon {
+                    font-family: '华文彩云 Regular', 华文彩云;
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    text-align: center;
+                    color: #f00;
+                    border: 1px solid #f00;
+                    border-radius: 50% 50%;
+                }
+                .del_area {
+                    cursor: pointer;
+                }
+            }
+            .area_ipt {
+                position: relative;
+                margin-top: 15px;
+                input {
+                    width: 200px;
+                    height: 30px;
+                }
+                .select_area_btn {
+                    position: absolute;
+                    top: 1px;
+                    right: 58px;
+                    width: 70px;
+                    height: 28px;
+                    padding: 0;
+                    color: #fff;
+                    border: none;
+                    background-color: #ddd;
+                }
+            }
+        }
+        .ipt_finish {
+            width: 350px;
+            margin-top: 80px;
+            text-align: center;
+            .next_step_btn {
+                @include step_btn;
+            }
+            .cancel_btn {
+                @include cancel_btn;
+            }
+        }
+    }
+    #areaModal {
+        .modal-body {
+            margin: 18px 15px;
+            padding: 0;
+            border: 1px solid #e4e4e4;
+            .area_selected {
+                padding: 5px;
+                border-bottom: 1px solid #e4e4e4;
+            }
+            .nav-tabs {
+                border-bottom: 0;
+            }
+            .nav-tabs li {
+                width: 50%;
+                text-align: center;
+                border: 1px solid #e4e4e4;
+                border-top: 0;
+            }
+            .nav-tabs > li.active {
+                border-bottom: 0;
+            }
+            .nav-tabs > li > a {
+                border: none;
+            }
+            .nav-tabs > li.active > a {
+                border: none;
+            }
+            .nav-tabs > li > a {
+                color: black;
+            }
+            .tab-pane {
+                min-height: 200px;
+            }
+            .area_name {
+                padding: 5px 0;
+                text-align: center;
+            }
+            .area_name_active{
+              background-color: #E4E4E4;
+              color: white;
+              font-weight: bold;
+            }
+            #common_used,
+            #service_area {
+                padding: 20px;
+                input{
+                  transform: translateY(2px);
+                }
+            }
+        }
+        .modal-footer {
+            padding-top: 0;
+            border-top: 0;
+        }
+    }
+    /*添加计划步骤二*/
+    .plan_info {
+        font-size: 16px;
+        .plan_name {
+            margin-right: 45px;
+        }
+        .plan_area {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .add_resource_btn {
+            margin-right: 25px;
+            color: #666;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            background-color: #fff;
+            border: 1px solid #C9C9C9;
+            font-size: 14px;
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        select {
+            margin-right: 10px;
+        }
+    }
+    /*素材选择列表*/
+    .material_table {
+        @extend .plan_table;
+        .not_selected {
+            color: #FF0000;
+        }
+        .serial_number {
+            input {
+                width: 30px;
+                text-align: center;
+            }
+        }
+        .article_title {
+            [type='checkbox'] {
+                float: left;
+                -webkit-transform: translateY(5px);
+                transform: translateY(5px);
+            }
+        }
+    }
+    .select_finish {
+        margin-top: 80px;
+        margin-left: 100px;
+        .last_step_btn {
+            @include step_btn;
+            margin-right: 20px;
+        }
+        .finish_btn {
+            @include step_btn;
+            margin-right: 20px;
+        }
+        .cancel_btn {
+            @include cancel_btn;
+        }
+    }
+    /*素材选择模态框*/
+    #materialModal,
+    #materialModal2,
+    #materialModal3,
+    #materialModal4 {
+        .modal-title {
+            font-weight: bold;
+        }
+        .modal-body {
+            select {
+                height: 26px;
+                width: 150px;
+                margin-right: 20px;
+            }
+            .material_list {
+                margin-top: 10px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-pack: distribute;
+                justify-content: space-around;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -ms-flex-line-pack: justify;
+                align-content: space-between;
+                .material_item {
+                    width: 150px;
+                    margin-bottom: 10px;
+                    padding: 5px;
+                    border:1px solid rgba(11,11,11,0);
+                    img {
+                        width: 138px;
+                        height: 90px;
+                    }
+                    .img_name {
+                        margin-bottom: 0;
+                        padding-top: 5px;
+                    }
+                }
+                .material_item_active {
+                    border: 1px solid rgb(111,143,255);
+                }
+            }
+        }
+        .modal-footer {
+            .page_tab {
+                width: 300px;
+                float: left;
+                text-align: left;
+                font-size: 16px;
+                line-height: 34px;
+                a,
+                span {
+                    margin-right: 10px;
+                }
+                a {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    .upload_form {
+        margin-top: 20px;
+        width: 500px;
+        float: left;
+        .data_type,
+        .data_url,
+        .upload_data {
+            margin-bottom: 20px;
+        }
+        .ipt_left {
+            width: 100px;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .data_type {
+            input {
+                -webkit-transform: translateY(2px);
+                transform: translateY(2px);
+            }
+            label {
+                font-weight: normal;
+                margin-right: 30px;
+            }
+        }
+        .browse_btn {
+            @include step_btn;
+            width: 50px;
+            height: 28px;
+            font-weight: normal;
+            text-align: center;
+            margin-bottom: 0;
+            cursor: pointer;
+            line-height: 28px;
+        }
+        .data_url {
+            input {
+                width: 240px;
+            }
+        }
+        .ipt_finish {
+            padding-left: 20px;
+            .ensure_btn {
+                @include step_btn;
+                width: 50px;
+                height: 30px;
+                margin-right: 20px;
+            }
+            .cancel_btn {
+                @include cancel_btn;
+            }
+        }
+    }
+    .pic_preview {
+        width: 550px;
+        float: left;
+        height: 70vh;
+        overflow: auto;
+        .pic_list {
+            overflow: hidden;
+            .pic_item {
+                width: 50%;
+                float: left;
+                margin-bottom: 10px;
+                .pic_name {
+                    input {
+                        width: 85%;
+                    }
+                    span {
+                        font-size: 24px;
+                        cursor: pointer;
+                    }
+                }
+                img {
+                    width: 260px;
+                    height: 170px;
+                }
+            }
+        }
+    }
+    .resource_table {
+        @extend .plan_table;
+        .item_name {
+            text-align: left;
+            width: 250px;
+            .indent {
+                display: inline-block;
+                width: 30px;
+                height: 24px;
+            }
+        }
+        .start_using {
+            input {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
