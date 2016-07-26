@@ -287,6 +287,12 @@ body {
                 cursor: pointer;
             }
         }
+        .cur_page_info {
+            input {
+                width: 40px;
+                height: 25px;
+            }
+        }
     }
     /*添加计划*/
     .addplan_step {
@@ -436,16 +442,16 @@ body {
                 padding: 5px 0;
                 text-align: center;
             }
-            .area_name_active{
-              background-color: #E4E4E4;
-              color: white;
-              font-weight: bold;
+            .area_name_active {
+                background-color: #E4E4E4;
+                color: white;
+                font-weight: bold;
             }
             #common_used,
             #service_area {
                 padding: 20px;
-                input{
-                  transform: translateY(2px);
+                input {
+                    transform: translateY(2px);
                 }
             }
         }
@@ -516,11 +522,14 @@ body {
         }
     }
     /*素材选择模态框*/
-    #resourceModal,
-    #selectPic_Modal,
+    #editArticle_Modal,
     #editPic_Modal,
+    #resourceModal,
     #selectArticle_Modal,
-    #editArticle_Modal {
+    #selectPic_Modal {
+        .modal-dialog{
+          width: 700px;
+        }
         .modal-title {
             font-weight: bold;
         }
@@ -545,7 +554,7 @@ body {
                     width: 150px;
                     margin-bottom: 10px;
                     padding: 5px;
-                    border:1px solid rgba(11,11,11,0);
+                    border: 1px solid rgba(11,11,11,0);
                     img {
                         width: 138px;
                         height: 90px;

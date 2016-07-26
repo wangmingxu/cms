@@ -2,7 +2,8 @@
 <div class="content">
 <h1>
 计划管理
-<span class="children_name">---广告资源位</span>
+<span class="children_name" ng-if="planType==1">---广告资源位</span>
+<span class="children_name" ng-if="planType==2">---文章资源位</span>
 <span class="back"><<返回上一级</span>
 </h1>
 <div class="select_info">
@@ -34,7 +35,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="item in list"  ng-switch="item.status">
+        <tr ng-repeat="item in list"  ng-switch="item.showPlanDTO.status">
             <td class="state" ng-switch-when="1">
               <img src="img/nostart.png" alt="" class="state_img" />未开始
             </td>
@@ -47,14 +48,14 @@
             <td class="state" ng-switch-when="4">
               <img src="img/end.png" alt="" class="state_img" />已结束
             </td>
-            <td class="plan_name">{{item.showPlanName}}</td>
-            <td class="source_name">{{item.resourceName}}</td>
+            <td class="plan_name">{{item.showPlanDTO.showPlanName}}</td>
+            <td class="source_name">{{item.resourcePositionNameCollection[0]}}</td>
             <td class="start_end_time">
-                <p>起：{{item.displayBeginTime}}</p>
-                <p>止：{{item.displayEndTime}}</p>
+                <p>起：{{item.showPlanDTO.displayBeginTime | date:'yyyy-MM-dd'}}</p>
+                <p>止：{{item.showPlanDTO.displayEndTime | date:'yyyy-MM-dd'}}</p>
             </td>
-            <td class="use_area">{{item.area}}</td>
-            <td class="priority">{{item.priority}}</td>
+            <td class="use_area">{{item.regionNameCollection[0]}}</td>
+            <td class="priority">{{item.showPlanDTO.priority}}</td>
             <td class="operate">
                 <span>编辑</span>
                 <span>删除</span>
@@ -63,7 +64,7 @@
     </tbody>
 </table>
 <div class="table_footer">
-    <span class="cur_page_info">当前第 1-15条，共 30 条，每页显示 15 行</span>
+    <span class="cur_page_info">当前第 1-15条，共 {{totalSize}} 条，每页显示 <input type="number" name="name" value="" step="5" max="20" min="5" ng-model="pageSize"> 行</span>
     <div class="tab_page">
         <span class="previous_page">上一页</span>
         <span class="page_num">1/2</span>
