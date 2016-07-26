@@ -24,6 +24,37 @@ angular.module('starter.controllers', [])
     $scope.toAddPlan = function() {
         $location.path("tab/addPlanStep1/" + $scope.planType);
     };
+    $scope.delPlan = function(i) {
+        var _url = prefix + "cms/showPlan/delete/showPlan";
+        var showPlanId = $scope.list[i].showPlanDTO.showPlanId;
+        $http({
+                method: 'GET',
+                url: _url,
+                data: {
+                    showPlanId: showPlanId
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data);
+                    $scope.list.splice(i, 1);
+                },
+                function errorCallback(data, status, headers, config) {
+
+                });
+    };
+    $scope.online = function(i) {
+        var _url = prefix + "cms/showPlan/immediatelyOnline";
+        $http({
+                method: 'GET',
+                url: _url
+            })
+            .then(function successCallback(data, status, headers, config) {
+                  console.log("发布成功");
+                },
+                function errorCallback(data, status, headers, config) {
+
+                });
+    };
     var _url = prefix + "cms/showPlan/query/showPlans";
     // Mock.mock(_url, {
     //     'list|1-10': [{
@@ -45,7 +76,6 @@ angular.module('starter.controllers', [])
                 console.log(data.data);
                 $scope.list = data.data.model.showPlanRowVOList;
                 $scope.totalSize = data.data.model.totalSize;
-                console.log(totalSize);
             },
             function errorCallback(data, status, headers, config) {
                 console.log(data);
@@ -88,6 +118,7 @@ angular.module('starter.controllers', [])
 //添加计划步骤一
 .controller('addPlanStep1Ctrl', function($scope, $http, $location, prefix, $cacheFactory, $state, $filter, $stateParams) {
     $scope.start_time = new Date();
+    $scope.end_time = new Date();
     $scope.planType = $stateParams.planType;
     if (window.cache) {
         console.log("存在缓存");
@@ -120,14 +151,12 @@ angular.module('starter.controllers', [])
     $scope.cacheIpt = function(cache) {
         // var start_time = $filter("date")($scope.start_time, "yyyy-MM-dd");
         // var end_time = $filter("date")($scope.end_time, "yyyy-MM-dd");
-        var start_time = $scope.start_time;
-        var end_time = $scope.end_time;
         var admin_isSelect = JSON.stringify($scope.admin_isSelect);
         var serviceArea_selectIndex = JSON.stringify($scope.serviceArea_selectIndex);
         var serviceArea_isSelect = JSON.stringify($scope.serviceArea_isSelect);
         cache.put('planName', $scope.planName);
-        cache.put('start_time', start_time);
-        cache.put('end_time', end_time);
+        cache.put('start_time', $scope.start_time);
+        cache.put('end_time', $scope.end_time);
         cache.put('planType', $scope.planType);
         cache.put('priority', $scope.priority);
         cache.put('admin_isSelect', admin_isSelect);
@@ -202,7 +231,8 @@ angular.module('starter.controllers', [])
 })
 
 //添加计划步骤二
-.controller('addPlanStep2Ctrl', function($scope, $http, $location, prefix, $state, $cacheFactory, $filter) {
+.controller('addPlanStep2Ctrl', function($scope, $http, $location, prefix, $state, $cacheFactory, $filter, $timeout) {
+    $scope.prefix = prefix;
     // console.log(JSON.parse(cache.get('admin_isSelect')));
     // console.log(JSON.parse(cache.get('serviceArea_isSelect')));
     // $("[data-toggle='popover']").popover();
@@ -228,7 +258,7 @@ angular.module('starter.controllers', [])
             })
             .then(function successCallback(data, status, headers, config) {
                     // $scope.picList = data.data.list;  //模拟数据
-                    $scope.picList = data.data.model.materialDTOList;   //真实数据
+                    $scope.picList = data.data.model.materialDTOList; //真实数据
                     console.log($scope.picList);
                 },
                 function errorCallback(data, status, headers, config) {
@@ -303,8 +333,8 @@ angular.module('starter.controllers', [])
     $scope.pic_next = function(i) {
         $scope.temp_picList_next = [];
         var temp_index;
-        if(i!=undefined){
-          $scope.temp_index=i;
+        if (i !== undefined) {
+            $scope.temp_index = i;
         }
         $scope.checked_resource[$scope.temp_index].picList.map(function(item, i) {
             if (item.isSelect) {
@@ -314,8 +344,8 @@ angular.module('starter.controllers', [])
         if (!i) {
             $('#selectPic_Modal').modal('hide');
             $('#editPic_Modal').modal('show');
-        }else{
-          $('#editPic_Modal').modal('show');
+        } else {
+            $('#editPic_Modal').modal('show');
         }
     };
     $scope.swapItems = function(arr, index1, index2) {
@@ -323,7 +353,7 @@ angular.module('starter.controllers', [])
         return arr;
     };
     $scope.move_up = function(arr, $index) {
-        if ($index == 0) {
+        if ($index === 0) {
             return;
         }
         $scope.swapItems(arr, $index, $index - 1);
@@ -341,15 +371,15 @@ angular.module('starter.controllers', [])
     };
     $scope.picPlan_finish = function() {
         console.log($scope.checked_resource);
-        $scope.resourcePositionMaterialReleaseVOList=[];
-        $scope.checked_resource.map(function(item,i){
-          var obj={};
-          obj.resourcePositionId=item.resourcePositionId;
-          obj.materialIdList=[];
-          item.picList.map(function(item,i){
-            obj.materialIdList.push(item.materialId);
-          });
-          $scope.resourcePositionMaterialReleaseVOList.push(obj);
+        $scope.resourcePositionMaterialReleaseVOList = [];
+        $scope.checked_resource.map(function(item, i) {
+            var obj = {};
+            obj.resourcePositionId = item.resourcePositionId;
+            obj.materialIdList = [];
+            item.picList.map(function(item, i) {
+                obj.materialIdList.push(item.materialId);
+            });
+            $scope.resourcePositionMaterialReleaseVOList.push(obj);
         });
         console.log($scope.resourcePositionMaterialReleaseVOList);
         var data = {
@@ -358,23 +388,32 @@ angular.module('starter.controllers', [])
             displayBeginTime: $scope.start_time,
             displayEndTime: $scope.end_time,
             priority: $scope.priority,
-            provinceIdList:$scope.admin_isSelect,
-            cityConfigIdList:$scope.serviceArea_isSelect,
-            resourcePositionMaterialReleaseVOList:$scope.resourcePositionMaterialReleaseVOList
+            provinceIdListByAdministrative: $scope.admin_isSelect,
+            provinceIdListByServiceArea: $scope.serviceArea_isSelect,
+            resourcePositionMaterialReleaseVOList: $scope.resourcePositionMaterialReleaseVOList
         };
         console.log(data);
-        var _url=prefix+"cms/showPlan/release";
+        var _url = prefix + "cms/showPlan/release";
         $http({
                 method: 'POST',
                 url: _url,
                 data: data
             })
             .then(function successCallback(data, status, headers, config) {
-                    $scope.articleList = data.data.list;
                     console.log(data.data);
+                    if (data.data.success) {
+                        $('#addPlanSuccess').modal('show');
+                        $timeout(function() {
+                            $('#addPlanSuccess').modal('hide');
+                        }, 800);
+                    }
                 },
                 function errorCallback(data, status, headers, config) {
                     console.log(data);
+                    $('#addPlanFail').modal('show');
+                    $timeout(function() {
+                        $('#addPlanFail').modal('hide');
+                    }, 800);
                 });
     };
     $scope.getArticle = function() {
@@ -426,7 +465,7 @@ angular.module('starter.controllers', [])
         }
         fd.append("targetUrl", $scope.targetUrl);
         //  var _url=prefix+"uploadpic"
-        var _url = prefix+"cms/material/upload/pictures";
+        var _url = prefix + "cms/material/upload/pictures";
         $.ajax({
                 url: _url,
                 type: 'POST',

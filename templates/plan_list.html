@@ -49,16 +49,30 @@
               <img src="img/end.png" alt="" class="state_img" />已结束
             </td>
             <td class="plan_name">{{item.showPlanDTO.showPlanName}}</td>
-            <td class="source_name">{{item.resourcePositionNameCollection[0]}}</td>
+            <td class="source_name">
+              <span ng-repeat="resourceName in item.resourcePositionNameCollection" ng-if="$index<2">
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length!=1">{{resourceName}}|</span>
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length==1">{{resourceName}}</span>
+              <span ng-if="$index==1">{{resourceName}}</span>
+              <span ng-if="$index==2">...</span>
+            </span></td>
             <td class="start_end_time">
                 <p>起：{{item.showPlanDTO.displayBeginTime | date:'yyyy-MM-dd'}}</p>
                 <p>止：{{item.showPlanDTO.displayEndTime | date:'yyyy-MM-dd'}}</p>
             </td>
-            <td class="use_area">{{item.regionNameCollection[0]}}</td>
+            <td class="use_area">
+            <span ng-repeat="area in item.regionNameCollection" ng-if="$index<2">
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length!=1">{{area}}|</span>
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length==1">{{area}}</span>
+              <span ng-if="$index==1">{{area}}</span>
+              <span ng-if="$index==2">...</span>
+            </span>
+            </td>
             <td class="priority">{{item.showPlanDTO.priority}}</td>
             <td class="operate">
-                <span>编辑</span>
-                <span>删除</span>
+                <!-- <span>编辑</span> -->
+                <span ng-click="delPlan($index)">删除</span>
+                <span ng-click="online()">上线</span>
             </td>
         </tr>
     </tbody>

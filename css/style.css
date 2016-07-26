@@ -518,7 +518,8 @@ body {
       .content #selectArticle_Modal .modal-body .material_list .material_item .img_name,
       .content #selectPic_Modal .modal-body .material_list .material_item .img_name {
         margin-bottom: 0;
-        padding-top: 5px; }
+        padding-top: 5px;
+        text-align: center; }
     .content #editArticle_Modal .modal-body .material_list .material_item_active,
     .content #editPic_Modal .modal-body .material_list .material_item_active,
     .content #resourceModal .modal-body .material_list .material_item_active,
