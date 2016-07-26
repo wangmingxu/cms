@@ -4,7 +4,7 @@
 计划管理
 <span class="children_name" ng-if="planType==1">---广告资源位</span>
 <span class="children_name" ng-if="planType==2">---文章资源位</span>
-<span class="back"><<返回上一级</span>
+<span class="back" ui-sref="tab.planEntrance"><<返回上一级</span>
 </h1>
 <div class="select_info">
 <button type="button" name="button" class="add_plan_btn" ng-click="toAddPlan()">+添加计划</button>
@@ -71,7 +71,7 @@
             <td class="priority">{{item.showPlanDTO.priority}}</td>
             <td class="operate">
                 <!-- <span>编辑</span> -->
-                <span ng-click="delPlan($index)">删除</span>
+                <span ng-click="delPlan(item.showPlanDTO.showPlanId)">删除</span>
                 <span ng-click="online()">上线</span>
             </td>
         </tr>

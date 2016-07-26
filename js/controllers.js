@@ -24,14 +24,13 @@ angular.module('starter.controllers', [])
     $scope.toAddPlan = function() {
         $location.path("tab/addPlanStep1/" + $scope.planType);
     };
-    $scope.delPlan = function(i) {
+    $scope.delPlan = function(id) {
         var _url = prefix + "cms/showPlan/delete/showPlan";
-        var showPlanId = $scope.list[i].showPlanDTO.showPlanId;
         $http({
                 method: 'GET',
                 url: _url,
                 data: {
-                    showPlanId: showPlanId
+                    showPlanId: id
                 }
             })
             .then(function successCallback(data, status, headers, config) {
