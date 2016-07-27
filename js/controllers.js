@@ -29,13 +29,14 @@ angular.module('starter.controllers', [])
         $http({
                 method: 'GET',
                 url: _url,
-                data: {
+                params: {
                     showPlanId: id
                 }
             })
             .then(function successCallback(data, status, headers, config) {
                     console.log(data);
-                    $scope.list.splice(i, 1);
+                    // $scope.list.splice(i, 1);
+                    $scope.getPlan();
                 },
                 function errorCallback(data, status, headers, config) {
 
@@ -48,70 +49,121 @@ angular.module('starter.controllers', [])
                 url: _url
             })
             .then(function successCallback(data, status, headers, config) {
-                  console.log("发布成功");
+                    console.log("发布成功");
                 },
                 function errorCallback(data, status, headers, config) {
 
                 });
     };
-    var _url = prefix + "cms/showPlan/query/showPlans";
-    // Mock.mock(_url, {
-    //     'list|1-10': [{
-    //         'id|+1': 1,
-    //         'status|1-4': 4,
-    //         'planName': '20160621首焦1油品专题',
-    //         'resourceName': "PC首页焦点图1",
-    //         'startTime': '2016/06/21',
-    //         'stopTime': '不限',
-    //         'area|1': ['中山', '广州', '佛山', '珠海'],
-    //         'youxianji|1-5': 1
-    //     }]
-    // });
-    $http({
-            method: 'GET',
-            url: _url
-        })
-        .then(function successCallback(data, status, headers, config) {
-                console.log(data.data);
-                $scope.list = data.data.model.showPlanRowVOList;
-                $scope.totalSize = data.data.model.totalSize;
-            },
-            function errorCallback(data, status, headers, config) {
-                console.log(data);
-            });
-
+    $scope.getPlan = function() {
+        var _url = prefix + "cms/showPlan/query/showPlans";
+        // Mock.mock(_url, {
+        //     'list|1-10': [{
+        //         'id|+1': 1,
+        //         'status|1-4': 4,
+        //         'planName': '20160621首焦1油品专题',
+        //         'resourceName': "PC首页焦点图1",
+        //         'startTime': '2016/06/21',
+        //         'stopTime': '不限',
+        //         'area|1': ['中山', '广州', '佛山', '珠海'],
+        //         'youxianji|1-5': 1
+        //     }]
+        // });
+        $http({
+                method: 'GET',
+                url: _url
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data.data);
+                    $scope.list = data.data.model.showPlanRowVOList;
+                    $scope.totalSize = data.data.model.totalSize;
+                },
+                function errorCallback(data, status, headers, config) {
+                    console.log(data);
+                });
+    };
+    $scope.getPlan();
 })
 
 //图片素材列表
 .controller('picMaterialCtrl', function($scope, $http, $location, prefix, $cacheFactory, $state) {
-    var _url = prefix + 'cms/material/query/materials?materialType=1';
-    $http({
-            method: 'GET',
-            url: _url,
-        })
-        .then(function successCallback(data, status, headers, config) {
-                console.log(data.data);
-                $scope.list = data.data.model.materialDTOList;
-            },
-            function errorCallback(data, status, headers, config) {
-                console.log(data);
-            });
+    $scope.getPicList = function() {
+        var _url = prefix + 'cms/material/query/materials';
+        $http({
+                method: 'GET',
+                url: _url,
+                params: {
+                    materialType: 1
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data.data);
+                    $scope.list = data.data.model.materialDTOList;
+                },
+                function errorCallback(data, status, headers, config) {
+                    console.log(data);
+                });
+    };
+    $scope.getPicList();
+    $scope.delMaterial = function(id) {
+        var del_url = prefix + "cms/material/delete/material";
+        $http({
+                method: 'GET',
+                url: del_url,
+                params: {
+                    materialId: id
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data);
+                    $scope.getPicList();
+                },
+                function errorCallback(data, status, headers, config) {
+                    console.log(data);
+                });
+    };
+    $scope.preview=function(storageUrl){
+      $scope.picPreviewUrl=prefix+storageUrl;
+    };
 })
 
 //文章素材列表
 .controller('articleMaterialCtrl', function($scope, $http, $location, prefix, $cacheFactory, $state) {
-    var _url = prefix + 'cms/material/query/materials?materialType=2';
-    $http({
-            method: 'GET',
-            url: _url,
-        })
-        .then(function successCallback(data, status, headers, config) {
-                console.log(data.data);
-                $scope.list = data.data.model.materialDTOList;
-            },
-            function errorCallback(data, status, headers, config) {
-                console.log(data);
-            });
+    $scope.getArticleList = function() {
+        var _url = prefix + 'cms/material/query/materials';
+        $http({
+                method: 'GET',
+                url: _url,
+                params: {
+                    materialType: 2
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data.data);
+                    $scope.list = data.data.model.materialDTOList;
+                },
+                function errorCallback(data, status, headers, config) {
+                    console.log(data);
+                });
+    };
+    $scope.getArticleList();
+    $scope.delMaterial = function(id) {
+        var del_url = prefix + "cms/material/delete/material";
+        $http({
+                method: 'GET',
+                url: del_url,
+                params: {
+                    materialId: id
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data);
+                    $scope.getArticleList();
+                },
+                function errorCallback(data, status, headers, config) {
+                    console.log(data);
+                });
+    };
 })
 
 //添加计划步骤一
@@ -391,7 +443,7 @@ angular.module('starter.controllers', [])
             provinceIdListByServiceArea: $scope.serviceArea_isSelect,
             resourcePositionMaterialReleaseVOList: $scope.resourcePositionMaterialReleaseVOList
         };
-        console.log(data);
+        console.log(data);              //上传的数据
         var _url = prefix + "cms/showPlan/release";
         $http({
                 method: 'POST',

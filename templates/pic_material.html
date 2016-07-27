@@ -50,8 +50,8 @@
                 </td>
                 <td class="uploadtime">{{item.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td class="operate">
-                    <span>编辑</span>
-                    <span ng-click="delete(item.materialId)">删除</span>
+                    <span ng-click="preview(item.storageUrl)" data-toggle="modal" data-target="#picPreview">预览</span>
+                    <span ng-click="delMaterial(item.materialId)">删除</span>
                 </td>
             </tr>
         </tbody>
@@ -69,4 +69,14 @@
         </div>
     </div>
 </div>
+</div>
+<!--图片预览模态框-->
+<div class="modal fade" id="picPreview" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog" style="width:auto;max-width:1000px">
+      <div class="modal-content">
+         <div class="modal-body" style="text-align:center">
+            <img ng-src="{{picPreviewUrl}}" alt="" />
+         </div>
+      </div>
 </div>
