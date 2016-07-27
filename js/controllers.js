@@ -35,7 +35,6 @@ angular.module('starter.controllers', [])
             })
             .then(function successCallback(data, status, headers, config) {
                     console.log(data);
-                    // $scope.list.splice(i, 1);
                     $scope.getPlan();
                 },
                 function errorCallback(data, status, headers, config) {
@@ -49,7 +48,8 @@ angular.module('starter.controllers', [])
                 url: _url
             })
             .then(function successCallback(data, status, headers, config) {
-                    console.log("发布成功");
+                    console.log(data);
+                    $scope.getPlan();
                 },
                 function errorCallback(data, status, headers, config) {
 
@@ -74,7 +74,6 @@ angular.module('starter.controllers', [])
                 url: _url
             })
             .then(function successCallback(data, status, headers, config) {
-                    console.log(data.data);
                     $scope.list = data.data.model.showPlanRowVOList;
                     $scope.totalSize = data.data.model.totalSize;
                 },
@@ -182,7 +181,7 @@ angular.module('starter.controllers', [])
         $scope.serviceArea_selectIndex = JSON.parse(cache.get('serviceArea_selectIndex'));
         $scope.serviceArea_isSelect = JSON.parse(cache.get('serviceArea_isSelect'));
     }
-    var getArea_url = prefix + "cms/showPlan/allRegion";
+    var getArea_url = prefix + "cms/showPlan/allRegion";        //可缓存
     // Mock.mock(getArea_url, {
     //     'administration_area': ['中山', '广州', '佛山', '珠海', '北京', '天津', '河北', '山西', '内蒙', '上海', '山东', '江苏', '江西', '浙江', '福建', '湖北', '湖南', '河南', '广东'],
     //     'service_area': ['区域一：广东（包括郴州、衡阳、泉州、龙岩、厦门、漳州、江西赣州、海南、广西）', '区域二：湖南（长沙、株洲、娄底、岳阳、萍乡、宜春、湘潭、邵阳、益阳、常德、永州、怀化）', '区域三：福建（福州一区、福州二区、莆田、宁德、三明、南平）', '区域四：杭州'],
