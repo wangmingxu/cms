@@ -58,7 +58,7 @@
                         <span data-toggle="modal" data-target="#selectPic_Modal" ng-click="show_picList($index)" ng-if="!judge_hasSelect($index)">选择素材</span>
                         <span ng-click="pic_next($index)" ng-if="judge_hasSelect($index)">编辑素材</span>
                         <!-- <span data-toggle="modal" data-target="#selectArticle_Modal" ng-click="getArticle($index)">选择素材</span> -->
-                        <span>删除</span>
+                        <span ng-click="del_resource($index)">删除</span>
                     </td>
                 </tr>
             </tbody>
@@ -210,7 +210,7 @@
                                     </td>
                                     <!-- <td class="serial_number">{{$index}}</td> -->
                                     <td class="operate">
-                                        <span>删除</span>
+                                        <span ng-click="del_SelectPic($index)">删除</span>
                                         <span ng-click="move_down(temp_picList_next,$index)">下移</span>
                                         <span ng-click="move_up(temp_picList_next,$index)">上移</span>
                                     </td>

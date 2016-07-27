@@ -122,8 +122,8 @@ angular.module('starter.controllers', [])
                     console.log(data);
                 });
     };
-    $scope.preview=function(storageUrl){
-      $scope.picPreviewUrl=prefix+storageUrl;
+    $scope.preview = function(storageUrl) {
+        $scope.picPreviewUrl = prefix + storageUrl;
     };
 })
 
@@ -355,6 +355,9 @@ angular.module('starter.controllers', [])
         $scope.temp_index = i;
         $scope.temp_picList = $scope.checked_resource[i].picList;
     };
+    $scope.del_resource = function(i) {
+        $scope.checked_resource.splice(i, 1);
+    };
     $scope.select_pic = function(i) {
         if ($scope.temp_picList[i].isSelect) {
             $scope.temp_picList[i].isSelect = false;
@@ -398,6 +401,9 @@ angular.module('starter.controllers', [])
         } else {
             $('#editPic_Modal').modal('show');
         }
+    };
+    $scope.del_SelectPic = function(i) {
+        $scope.temp_picList_next.splice(i, 1);
     };
     $scope.swapItems = function(arr, index1, index2) {
         arr[index1] = arr.splice(index2, 1, arr[index1])[0];
@@ -443,7 +449,7 @@ angular.module('starter.controllers', [])
             provinceIdListByServiceArea: $scope.serviceArea_isSelect,
             resourcePositionMaterialReleaseVOList: $scope.resourcePositionMaterialReleaseVOList
         };
-        console.log(data);              //上传的数据
+        console.log(data); //上传的数据
         var _url = prefix + "cms/showPlan/release";
         $http({
                 method: 'POST',
