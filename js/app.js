@@ -59,6 +59,15 @@ angular.module('starter', ['ui.router','starter.controllers','starter.directives
                     }
                 }
             })
+            .state('tab.index', {
+                url: '^/',
+                views: {
+                    'content': {
+                        templateUrl: 'templates/plan_entrance.html',
+                        controller:'planEntranceCtrl'
+                    }
+                }
+            })
             .state('tab.planEntrance.planList', {                      //为了保存tab->planEntrance的选中状态，这里要把advPlan作为planEntrance的子状态
                 url: '^/tab/planList/{planType}',
                 views: {
