@@ -48,6 +48,9 @@
             <td class="state" ng-switch-when="4">
               <img src="img/end.png" alt="" class="state_img" />已结束
             </td>
+            <td class="state" ng-switch-when="5">
+              <img src="img/end.png" alt="" class="state_img" />计划冲突
+            </td>
             <td class="plan_name">{{item.showPlanDTO.showPlanName}}</td>
             <td class="source_name">
               <span ng-repeat="resourceName in item.resourcePositionNameCollection" ng-if="$index<2">

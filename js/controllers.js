@@ -212,6 +212,7 @@ angular.module('starter.controllers', [])
         cache.put('admin_isSelect', admin_isSelect);
         cache.put('serviceArea_selectIndex', serviceArea_selectIndex);
         cache.put('serviceArea_isSelect', serviceArea_isSelect);
+        cache.put('hasAllowNotLimited',$scope.hasAllowNotLimited);
     };
     $scope.toStep2 = function() {
         if (!window.cache) {
@@ -293,6 +294,7 @@ angular.module('starter.controllers', [])
     $scope.priority = cache.get('priority');
     $scope.admin_isSelect = JSON.parse(cache.get('admin_isSelect'));
     $scope.serviceArea_isSelect = JSON.parse(cache.get('serviceArea_isSelect'));
+    $scope.hasAllowNotLimited=cache.get('hasAllowNotLimited');
     $scope.getPic = function() {
         var _url = prefix + "cms/material/query/materials?materialType=1";
         // Mock.mock(_url, {
@@ -446,7 +448,8 @@ angular.module('starter.controllers', [])
             priority: $scope.priority,
             provinceIdListByAdministrative: $scope.admin_isSelect,
             provinceIdListByServiceArea: $scope.serviceArea_isSelect,
-            resourcePositionMaterialReleaseVOList: $scope.resourcePositionMaterialReleaseVOList
+            resourcePositionMaterialReleaseVOList: $scope.resourcePositionMaterialReleaseVOList,
+            hasAllowNotLimited:$scope.hasAllowNotLimited
         };
         console.log(data); //上传的数据
         var _url = prefix + "cms/showPlan/release";
@@ -469,6 +472,9 @@ angular.module('starter.controllers', [])
                     $('#addPlanFail').modal('show');
                     $timeout(function() {
                         $('#addPlanFail').modal('hide');
+                        $timeout(function() {
+                            $location.path('tab/planList/'+$scope.planType);
+                        }, 500);
                     }, 800);
                 });
     };

@@ -353,6 +353,11 @@ body {
         color: #fff;
         border: none;
         background-color: #ddd; }
+  .content .plan_form .all_country {
+    margin-top: 10px;
+    margin-left: 90px; }
+    .content .plan_form .all_country input {
+      transform: translateY(2px); }
   .content .plan_form .ipt_finish {
     width: 350px;
     margin-top: 80px;
