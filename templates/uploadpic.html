@@ -1,0 +1,60 @@
+<!--上传图片页面-->
+<div class="content">
+<h1>上传资料</h1>
+<div class="upload_form">
+  <!-- <div class="data_type">
+    <div class="ipt_left">资料类型</div>
+    <input type="radio" name="name" value="" id="picture" checked="true"><label for="picture">图片</label>
+    <input type="radio" name="name" value="" id="article"><label for="article">文章</label>
+  </div> -->
+  <!-- <div class="upload_data">
+    <div class="ipt_left">上传资料</div>
+    <label for="upload_resource" class="browse_btn">浏览</label>
+    <input type="file" name="name" value="" class="hide" id="upload_resource">
+  </div> -->
+  <div class="" ng-show="restCount!=0">
+      <pic-upload ng-model="picList" pic="picList"></pic-upload>
+  </div>
+  <div class="data_url">
+    <div class="ipt_left">URL链接：</div>
+    <input type="text" name="name" value="" ng-model="targetUrl">
+  </div>
+  <div class="ipt_finish">
+      <button type="button" name="button" class="ensure_btn" ng-click="upload()">确定</button>
+      <button type="button" name="button" class="cancel_btn">取消</button>
+  </div>
+</div>
+<div class="pic_preview">
+  <h4>素材预览(还可以上传{{restCount}}张)</h4>
+  <!-- <h4>素材预览</h4> -->
+  <div class="pic_list">
+    <div class="pic_item" ng-repeat="item in picList">
+      <div class="pic_name">
+        <input type="text" name="name" ng-value="item.title" ng-model="picList[$index].title">
+        <span ng-click="delPic($index)">X</span>
+      </div>
+      <img ng-src="{{item.base64}}" alt="" />
+    </div>
+  </div>
+</div>
+</div>
+<!--上传成功模态框-->
+<div class="modal fade" id="uploadFinish" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body" style="text-align:center">
+            上传成功
+         </div>
+      </div>
+</div>
+<!--上传失败模态框-->
+<div class="modal fade" id="uploadFail" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body" style="text-align:center">
+            上传失败
+         </div>
+      </div>
+</div>

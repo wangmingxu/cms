@@ -1,0 +1,25 @@
+<div class="left-nav">
+    <div class="logo_container">
+        <img src="./img/logo.png" alt="" class="logo"/>
+        <p class="title">
+            CMS内容管理系统
+        </p>
+        <p class="welcome">
+            欢迎你，Admin
+            <span>退出</span>
+        </p>
+    </div>
+    <div class="item_list_container">
+        <div class="item_list"  ui-sref="tab.planEntrance"  ui-sref-active="item_active">
+            展示计划
+        </div>
+        <div class="item_list" ui-sref="tab.materialEntrance"   ui-sref-active="item_active">
+            资料管理
+        </div>
+        <div class="item_list"  ui-sref="tab.nav" ui-sref-active="item_active">
+            页面管理
+        </div>
+    </div>
+</div>
+  <div ui-view="nav"></div>
+  <div ui-view="content"></div>

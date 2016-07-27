@@ -1,0 +1,91 @@
+<!--计划管理——广告资源位管理-->
+<div class="content">
+<h1>
+计划管理
+<span class="children_name" ng-if="planType==1">---广告资源位</span>
+<span class="children_name" ng-if="planType==2">---文章资源位</span>
+<span class="back" ui-sref="tab.planEntrance"><<返回上一级</span>
+</h1>
+<div class="select_info">
+<button type="button" name="button" class="add_plan_btn" ng-click="toAddPlan()">+添加计划</button>
+<select class="select_planState">
+    <option value="">请选择计划状态</option>
+    <option value="option">未开始</option>
+    <option value="option">进行中</option>
+    <option value="option">暂停</option>
+    <option value="option">已结束</option>
+</select>
+<select class="select_sourceName">
+    <option selected="" value="请选择资源位...">请选择资源位...</option>
+    <option value="PC端首页焦点图1">PC端首页焦点图1</option>
+    <option value="移动端首页焦点图1">移动端首页焦点图1</option>
+</select>
+</div>
+<div class="table-responsive plan_table">
+<table class="table">
+    <thead>
+        <tr>
+            <th>状态</th>
+            <th>计划名称</th>
+            <th>使用资源位</th>
+            <th>展示时间</th>
+            <th>投放区域</th>
+            <th>优先级</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in list"  ng-switch="item.showPlanDTO.status">
+            <td class="state" ng-switch-when="1">
+              <img src="img/nostart.png" alt="" class="state_img" />未开始
+            </td>
+            <td class="state" ng-switch-when="2">
+              <img src="img/ongoing.png" alt="" class="state_img" />进行中
+            </td>
+            <td class="state" ng-switch-when="3">
+              <img src="img/stop.png" alt="" class="state_img" />暂停中
+            </td>
+            <td class="state" ng-switch-when="4">
+              <img src="img/end.png" alt="" class="state_img" />已结束
+            </td>
+            <td class="plan_name">{{item.showPlanDTO.showPlanName}}</td>
+            <td class="source_name">
+              <span ng-repeat="resourceName in item.resourcePositionNameCollection" ng-if="$index<2">
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length!=1">{{resourceName}}|</span>
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length==1">{{resourceName}}</span>
+              <span ng-if="$index==1">{{resourceName}}</span>
+              <span ng-if="$index==2">...</span>
+            </span></td>
+            <td class="start_end_time">
+                <p>起：{{item.showPlanDTO.displayBeginTime | date:'yyyy-MM-dd'}}</p>
+                <p>止：{{item.showPlanDTO.displayEndTime | date:'yyyy-MM-dd'}}</p>
+            </td>
+            <td class="use_area">
+            <span ng-repeat="area in item.regionNameCollection" ng-if="$index<2">
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length!=1">{{area}}|</span>
+              <span ng-if="$index==0&&item.resourcePositionNameCollection.length==1">{{area}}</span>
+              <span ng-if="$index==1">{{area}}</span>
+              <span ng-if="$index==2">...</span>
+            </span>
+            </td>
+            <td class="priority">{{item.showPlanDTO.priority}}</td>
+            <td class="operate">
+                <!-- <span>编辑</span> -->
+                <span ng-click="delPlan(item.showPlanDTO.showPlanId)">删除</span>
+                <span ng-click="online()">上线</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="table_footer">
+    <span class="cur_page_info">当前第 1-15条，共 {{totalSize}} 条，每页显示 <input type="number" name="name" value="" step="5" max="20" min="5" ng-model="pageSize"> 行</span>
+    <div class="tab_page">
+        <span class="previous_page">上一页</span>
+        <span class="page_num">1/2</span>
+        <span class="next_page">下一页</span> 向第
+        <input type="text" name="page_num_ipt" value="" width="20"> 页
+        <span class="jump">跳转</span>
+    </div>
+</div>
+</div>
+</div>

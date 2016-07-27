@@ -1,0 +1,62 @@
+<!--广告资源位管理-->
+<div class="content">
+<h1>
+    资源位管理
+    <span class="children_name" ng-if="platform==1">当前位置：PC端--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==2">当前位置：M站--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==3">当前位置：IOS端--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==4">当前位置：Android端--首页--广告资源位</span>
+    <!-- <span class="back">返回上一级</span> -->
+</h1>
+<div class="select_info">
+    <button type="button" name="button" class="add_plan_btn">+添加资源位</button>
+    <select class="select_sourceName">
+        <option selected="" value="请选择资源位...">请选择资源位尺寸</option>
+        <option value="">760X450</option>
+        <option value="">1920X80</option>
+    </select>
+    <input type="text" name="name" value="" placeholder="资源位名称检索">
+</div>
+<div class="table-responsive plan_table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>资源位</th>
+                <th>位置预览</th>
+                <th>展示平台</th>
+                <th>素材类型</th>
+                <th>素材尺寸</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  ng-repeat="item in list" ng-if="item.platform==platform">
+                <td class="resource_name">{{item.resourcePositionName}}</td>
+                <td class="update_time">预览</td>
+                <td class="publish_time" ng-if="platform==1">PC</td>
+                <td class="publish_time" ng-if="platform==2">M站</td>
+                <td class="publish_time" ng-if="platform==3">Android</td>
+                <td class="publish_time" ng-if="platform==4">IOS</td>
+                <td class="">图片</td>
+                <td class="">{{item.pixelHeight}}X{{item.pixelWidth}}</td>
+                <td class="operate">
+                    <!-- <span>编辑</span> -->
+                    <span ng-click="delete(item.resourcePositionId)">删除</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="table_footer">
+        <span class="cur_page_info">当前第 1-15条，共 30 条，每页显示 <input type="number" name="name" value="" step="5" max="20" min="5" ng-model="pageSize">  行</span>
+        <div class="tab_page">
+            <span class="previous_page">上一页</span>
+            <span class="page_num">1/2</span>
+            <span class="next_page">下一页</span>
+            向第
+            <input type="text" name="page_num_ipt" value="" width="20">
+            页
+            <span class="jump">跳转</span>
+        </div>
+    </div>
+</div>
+</div>
