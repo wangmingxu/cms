@@ -1,8 +1,8 @@
 // angular.module('starter', ['starter.controllers', 'starter.services','starter.directives','starter.filters'])
-angular.module('starter', ['ui.router','starter.controllers','starter.directives'])
+angular.module('starter', ['starter.config','ui.router','starter.controllers','starter.directives'])
 
 // .constant('prefix', 'http://localhost/')
-.constant('prefix', 'http://192.168.17.9:8088/')
+// .constant('prefix', 'http://192.168.17.9:8088/')
 
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider

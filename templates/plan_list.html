@@ -74,8 +74,9 @@
             <td class="priority">{{item.showPlanDTO.priority}}</td>
             <td class="operate">
                 <!-- <span>编辑</span> -->
-                <span ng-click="delPlan(item.showPlanDTO.showPlanId)">删除</span>
                 <span ng-click="online()">上线</span>
+                <span ng-click="stop(item.showPlanDTO.showPlanId)">暂停</span>
+                <span ng-click="delPlan(item.showPlanDTO.showPlanId)">删除</span>
             </td>
         </tr>
     </tbody>
