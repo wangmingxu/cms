@@ -21,7 +21,7 @@
         <!-- <p class="plan_area">投放区域：<span ng-repeat="area in admin_isSelect">{{area.provinceName}}|</span><span ng-repeat="province in serviceArea_isSelect">{{province.provinceName}}|</span></p> -->
         <p></p>
         <button type="button" name="button" class="add_resource_btn" data-toggle="modal" data-target="#resourceModal" ng-click="getAdvResource()">+添加资源位</button>
-        <select class="select_platform">
+        <!-- <select class="select_platform">
             <option value="option">请选择平台</option>
             <option value="option">PC端</option>
             <option value="option">M站</option>
@@ -31,7 +31,7 @@
             <option value="option">请选择栏目</option>
             <option value="option">PC端帮助中心</option>
         </select>
-        <input type="text" name="name" value="" placeholder="输入资源位名称搜索">
+        <input type="text" name="name" value="" placeholder="输入资源位名称搜索"> -->
     </div>
     <div class="table-responsive">
         <table class="table material_table">
@@ -119,12 +119,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="page_tab">
+                    <!-- <div class="page_tab">
                         <span>每页显示10行</span>
                         <a>上一页</a>
                         <span>1/2</span>
                         <a>下一页</a>
-                    </div>
+                    </div> -->
                     <button type="button" class="btn btn-primary" ng-click="resource_ensure()" data-dismiss="modal">确定
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -147,12 +147,12 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <h5>当前资源位：PC端首页焦点图1</h5>
+                    <!-- <h5>当前资源位：PC端首页焦点图1</h5>
                     <select class="" name="">
                         <option value="option">上传时间由近到远</option>
                         <option value="option">上传时间由远到近</option>
                     </select>
-                    <input type="text" name="name" value="" placeholder="输入素材名称">
+                    <input type="text" name="name" value="" placeholder="输入素材名称"> -->
                     <div class="well well-lg material_list">
                         <div class="material_item" ng-repeat="item in temp_picList" ng-click="select_pic($index)" ng-class="SelectClass($index)">
                             <img ng-src="{{picUrl}}{{item.storageUrl}}" alt=""/>
@@ -185,11 +185,11 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <h5>当前资源位：PC帮助中心--账户管理</h5>
+                    <!-- <h5>当前资源位：PC帮助中心--账户管理</h5>
                     <select class="" name="">
                         <option value="option">上传时间由近到远</option>
                     </select>
-                    <input type="text" name="name" value="" placeholder="输入标题名称">
+                    <input type="text" name="name" value="" placeholder="输入标题名称"> -->
                     <div class="table-responsive">
                         <table class="table material_table">
                             <thead>
@@ -244,11 +244,11 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <h5>当前资源位：PC帮助中心--账户管理</h5>
+                    <!-- <h5>当前资源位：PC帮助中心--账户管理</h5>
                     <select class="" name="">
                         <option value="option">上传时间由近到远</option>
                     </select>
-                    <input type="text" name="name" value="" placeholder="输入标题名称">
+                    <input type="text" name="name" value="" placeholder="输入标题名称"> -->
                     <div class="table-responsive">
                         <table class="table material_table">
                             <thead>
@@ -273,12 +273,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="page_tab">
+                    <!-- <div class="page_tab">
                         <span>每页显示10行</span>
                         <a>上一页</a>
                         <span>1/2</span>
                         <a>下一页</a>
-                    </div>
+                    </div> -->
                     <button type="button" class="btn btn-primary" ng-click="article_ensure()">下一步
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -301,7 +301,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <h5>当前资源位：PC帮助中心--账户管理</h5>
+                    <!-- <h5>当前资源位：PC帮助中心--账户管理</h5> -->
                     <div class="table-responsive">
                         <table class="table material_table">
                             <thead>
@@ -346,12 +346,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="page_tab">
+                    <!-- <div class="page_tab">
                         <span>每页显示10行</span>
                         <a>上一页</a>
                         <span>1/2</span>
                         <a>下一页</a>
-                    </div>
+                    </div> -->
                     <button type="button" class="btn btn-primary">确定
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">
