@@ -3,9 +3,10 @@
 <h1>
     资源位管理
     <span class="children_name" ng-if="platform==1">当前位置：PC端--首页--广告资源位</span>
-    <span class="children_name" ng-if="platform==2">当前位置：M站--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==2">当前位置：微信--首页--广告资源位</span>
     <span class="children_name" ng-if="platform==3">当前位置：IOS端--首页--广告资源位</span>
     <span class="children_name" ng-if="platform==4">当前位置：Android端--首页--广告资源位</span>
+    <span class="children_name" ng-if="platform==5">当前位置：M站--首页--广告资源位</span>
     <!-- <span class="back">返回上一级</span> -->
 </h1>
 <div class="select_info">
@@ -34,9 +35,10 @@
                 <td class="resource_name">{{item.resourcePositionName}}</td>
                 <td class="update_time">预览</td>
                 <td class="publish_time" ng-if="platform==1">PC</td>
-                <td class="publish_time" ng-if="platform==2">M站</td>
+                <td class="publish_time" ng-if="platform==2">微信</td>
                 <td class="publish_time" ng-if="platform==3">Android</td>
                 <td class="publish_time" ng-if="platform==4">IOS</td>
+                <td class="publish_time" ng-if="platform==5">M站</td>
                 <td class="">图片</td>
                 <td class="">{{item.pixelHeight}}X{{item.pixelWidth}}</td>
                 <td class="operate">

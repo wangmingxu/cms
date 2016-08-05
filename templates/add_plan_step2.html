@@ -48,9 +48,10 @@
                 <tr ng-repeat="item in checked_resource">
                     <td class="resource_name">{{item.resourcePositionName}}</td>
                     <td class="resource_platform" ng-if="item.platform==1">PC端</td>
-                    <td class="resource_platform" ng-if="item.platform==2">M站</td>
+                    <td class="resource_platform" ng-if="item.platform==2">微信</td>
                     <td class="resource_platform" ng-if="item.platform==3">IOS端</td>
                     <td class="resource_platform" ng-if="item.platform==4">Android端</td>
+                    <td class="resource_platform" ng-if="item.platform==5">M站</td>
                     <td class="resource_programa">PC首页</td>       <!--暂无栏目信息-->
                     <td class="material_state not_selected" ng-if="!judge_hasSelect($index)">未选素材</td>
                     <td class="material_state" ng-if="judge_hasSelect($index)">已选素材</td>
@@ -102,9 +103,10 @@
                                         <input type="checkbox" name="name" value="" ng-model="resource.isChecked">{{resource.resourcePositionName}}
                                     </td>
                                     <td class="" ng-if="resource.platform==1">PC</td>
-                                    <td class="" ng-if="resource.platform==2">M站</td>
+                                    <td class="" ng-if="resource.platform==2">微信</td>
                                     <td class="" ng-if="resource.platform==3">IOS</td>
                                     <td class="" ng-if="resource.platform==4">Android</td>
+                                    <td class="" ng-if="resource.platform==5">M站</td>
                                     <td class="material_type">
                                         图片
                                     </td>
