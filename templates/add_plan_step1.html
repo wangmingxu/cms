@@ -81,7 +81,7 @@
             </div>
             <div class="ipt_finish">
                 <button type="button" name="button" class="next_step_btn" ng-click="toStep2()" ng-disabled='(!planName)||(!priority)||(!start_time)||(!end_time)||((!admin_isSelect.length)&&(!serviceArea_isSelect.length)&&(!hasAllowNotLimited))'>下一步</button>
-                <button type="button" name="button" class="cancel_btn">取消</button>
+                <button type="button" name="button" class="cancel_btn" ui-sref="tab.planEntrance">取消</button>
             </div>
         </form>
     </div>

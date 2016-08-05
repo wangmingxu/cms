@@ -104,8 +104,8 @@
                                     </td>
                                     <td class="" ng-if="resource.platform==1">PC</td>
                                     <td class="" ng-if="resource.platform==2">微信</td>
-                                    <td class="" ng-if="resource.platform==3">IOS</td>
-                                    <td class="" ng-if="resource.platform==4">Android</td>
+                                    <td class="" ng-if="resource.platform==3">Android</td>
+                                    <td class="" ng-if="resource.platform==4">IOS</td>
                                     <td class="" ng-if="resource.platform==5">M站</td>
                                     <td class="material_type">
                                         图片
@@ -195,7 +195,7 @@
                             <thead>
                                 <tr>
                                     <th>图片标题</th>
-                                    <th>图片预览</th>
+                                    <!-- <th>图片预览</th> -->
                                     <th>链接预览</th>
                                     <!-- <th>排序</th> -->
                                     <th>操作</th>
@@ -204,9 +204,9 @@
                             <tbody>
                                 <tr ng-repeat="item in temp_picList_next">
                                     <td class="pic_title">{{item.materialName}}</td>
-                                    <td class="preview">
+                                    <!-- <td class="preview">
                                         <a href="#" data-toggle="popover" data-trigger="hover" data-content="<img src='{{item.storageUrl}}' width='250'>" data-placement="bottom" data-html="true">预览</a>
-                                    </td>
+                                    </td> -->
                                     <td class="link_preview">
                                         <a ng-href="{{item.targetUrl}}" target="_blank">预览</a>
                                     </td>
