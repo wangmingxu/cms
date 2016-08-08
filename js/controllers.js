@@ -55,20 +55,22 @@ angular.module('starter.controllers', [])
 
                 });
     };
-    $scope.stop=function(id){
-      var _url = apiUrl + "cms/showPlan/pause/showPlan";
-      $http({
-              method: 'GET',
-              url: _url,
-              params:{showPlanId:id}
-          })
-          .then(function successCallback(data, status, headers, config) {
-                  console.log(data);
-                  $scope.getPlan();
-              },
-              function errorCallback(data, status, headers, config) {
-                  console.log(data);
-              });
+    $scope.stop = function(id) {
+        var _url = apiUrl + "cms/showPlan/pause/showPlan";
+        $http({
+                method: 'GET',
+                url: _url,
+                params: {
+                    showPlanId: id
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                    console.log(data);
+                    $scope.getPlan();
+                },
+                function errorCallback(data, status, headers, config) {
+                    console.log(data);
+                });
     };
     $scope.getPlan = function() {
         var _url = apiUrl + "cms/showPlan/query/showPlans";
@@ -100,7 +102,7 @@ angular.module('starter.controllers', [])
 })
 
 //图片素材列表
-.controller('picMaterialCtrl', function($scope, $http, $location, apiUrl, $cacheFactory, $state,picUrl) {
+.controller('picMaterialCtrl', function($scope, $http, $location, apiUrl, $cacheFactory, $state, picUrl) {
     $scope.getPicList = function() {
         var _url = apiUrl + 'cms/material/query/materials';
         $http({
@@ -196,7 +198,7 @@ angular.module('starter.controllers', [])
         $scope.serviceArea_selectIndex = JSON.parse(cache.get('serviceArea_selectIndex'));
         $scope.serviceArea_isSelect = JSON.parse(cache.get('serviceArea_isSelect'));
     }
-    var getArea_url = apiUrl + "cms/showPlan/allRegion";        //可缓存
+    var getArea_url = apiUrl + "cms/showPlan/allRegion"; //可缓存
     // Mock.mock(getArea_url, {
     //     'administration_area': ['中山', '广州', '佛山', '珠海', '北京', '天津', '河北', '山西', '内蒙', '上海', '山东', '江苏', '江西', '浙江', '福建', '湖北', '湖南', '河南', '广东'],
     //     'service_area': ['区域一：广东（包括郴州、衡阳、泉州、龙岩、厦门、漳州、江西赣州、海南、广西）', '区域二：湖南（长沙、株洲、娄底、岳阳、萍乡、宜春、湘潭、邵阳、益阳、常德、永州、怀化）', '区域三：福建（福州一区、福州二区、莆田、宁德、三明、南平）', '区域四：杭州'],
@@ -227,7 +229,7 @@ angular.module('starter.controllers', [])
         cache.put('admin_isSelect', admin_isSelect);
         cache.put('serviceArea_selectIndex', serviceArea_selectIndex);
         cache.put('serviceArea_isSelect', serviceArea_isSelect);
-        cache.put('hasAllowNotLimited',$scope.hasAllowNotLimited);
+        cache.put('hasAllowNotLimited', $scope.hasAllowNotLimited);
     };
     $scope.toStep2 = function() {
         if (!window.cache) {
@@ -297,7 +299,7 @@ angular.module('starter.controllers', [])
 })
 
 //添加计划步骤二
-.controller('addPlanStep2Ctrl', function($scope, $http, $location, apiUrl, $state, $cacheFactory, $filter, $timeout,picUrl) {
+.controller('addPlanStep2Ctrl', function($scope, $http, $location, apiUrl, $state, $cacheFactory, $filter, $timeout, picUrl) {
     $scope.picUrl = picUrl;
     // console.log(JSON.parse(cache.get('admin_isSelect')));
     // console.log(JSON.parse(cache.get('serviceArea_isSelect')));
@@ -309,7 +311,7 @@ angular.module('starter.controllers', [])
     $scope.priority = cache.get('priority');
     $scope.admin_isSelect = JSON.parse(cache.get('admin_isSelect'));
     $scope.serviceArea_isSelect = JSON.parse(cache.get('serviceArea_isSelect'));
-    $scope.hasAllowNotLimited=cache.get('hasAllowNotLimited');
+    $scope.hasAllowNotLimited = cache.get('hasAllowNotLimited');
     $scope.getPic = function() {
         var _url = apiUrl + "cms/material/query/materials?materialType=1";
         // Mock.mock(_url, {
@@ -326,10 +328,52 @@ angular.module('starter.controllers', [])
             .then(function successCallback(data, status, headers, config) {
                     // $scope.picList = data.data.list;  //模拟数据
                     $scope.picList = data.data.model.materialDTOList; //真实数据
+                    $scope.cur_pageIndex=0;
+                    $scope.totalSize=data.data.model.totalSize;
                     console.log($scope.picList);
                 },
                 function errorCallback(data, status, headers, config) {
                     console.log(data);
+                });
+    };
+    $scope.nextpage = function() {
+        var _url = apiUrl + "cms/material/query/materials";
+        var pageIndex=$scope.cur_pageIndex+1;
+        $http({
+                method: 'GET',
+                url: _url,
+                params:{
+                  materialType:1,
+                  pageIndex:pageIndex
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                $scope.picList = data.data.model.materialDTOList;
+                $scope.cur_pageIndex=pageIndex;
+                console.log($scope.picList);
+                },
+                function errorCallback(data, status, headers, config) {
+
+                });
+    };
+    $scope.prevpage = function() {
+        var _url = apiUrl + "cms/material/query/materials";
+        var pageIndex=$scope.cur_pageIndex-1;
+        $http({
+                method: 'GET',
+                url: _url,
+                params:{
+                  materialType:1,
+                  pageIndex:pageIndex
+                }
+            })
+            .then(function successCallback(data, status, headers, config) {
+                $scope.picList = data.data.model.materialDTOList;
+                $scope.cur_pageIndex=pageIndex;
+                console.log($scope.picList);
+                },
+                function errorCallback(data, status, headers, config) {
+
                 });
     };
     $scope.getPic();
@@ -464,7 +508,7 @@ angular.module('starter.controllers', [])
             provinceIdListByAdministrative: $scope.admin_isSelect,
             provinceIdListByServiceArea: $scope.serviceArea_isSelect,
             resourcePositionMaterialReleaseVOList: $scope.resourcePositionMaterialReleaseVOList,
-            hasAllowNotLimited:$scope.hasAllowNotLimited
+            hasAllowNotLimited: $scope.hasAllowNotLimited
         };
         console.log(data); //上传的数据
         var _url = apiUrl + "cms/showPlan/release";
@@ -488,7 +532,7 @@ angular.module('starter.controllers', [])
                     $timeout(function() {
                         $('#addPlanFail').modal('hide');
                         $timeout(function() {
-                            $location.path('tab/planList/'+$scope.planType);
+                            $location.path('tab/planList/' + $scope.planType);
                         }, 500);
                     }, 800);
                 });

@@ -163,6 +163,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                  <div class="page_tab">
+                      <span>每页显示10行</span>
+                      <a ng-click="prevpage()" ng-show="cur_pageIndex!=0">上一页</a>
+                      <span>{{cur_pageIndex}}/{{totalSize/10}}</span>
+                      <a ng-click="nextpage()" ng-show="(cur_pageIndex+1)*10<totalSize">下一页</a>
+                  </div>
                     <button type="button" class="btn btn-primary" ng-click="pic_next()">下一步
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">
