@@ -312,7 +312,7 @@ angular.module('starter.controllers', [])
     $scope.admin_isSelect = JSON.parse(cache.get('admin_isSelect'));
     $scope.serviceArea_isSelect = JSON.parse(cache.get('serviceArea_isSelect'));
     $scope.hasAllowNotLimited = cache.get('hasAllowNotLimited');
-    $scope.getPic = function() {
+    $scope.getPic = function() {               //改
         var _url = apiUrl + "cms/material/query/materials?materialType=1";
         // Mock.mock(_url, {
         //     'list|6-10': [{
@@ -405,33 +405,33 @@ angular.module('starter.controllers', [])
     };
     $scope.resource_ensure = function() {
         $scope.resourceList.map(function(item, i) {
-            if (item.isChecked) {
+            if (item.isChecked) {  //改
                 item.picList = angular.copy($scope.picList); //!!!!!!引用数据类型要用copy
                 $scope.checked_resource.push(item);
             }
         });
     };
-    $scope.show_picList = function(i) {
+    $scope.show_picList = function(i) { //改
         $scope.temp_index = i;
         $scope.temp_picList = $scope.checked_resource[i].picList;
     };
     $scope.del_resource = function(i) {
         $scope.checked_resource.splice(i, 1);
     };
-    $scope.select_pic = function(i) {
+    $scope.select_pic = function(i) {            //改  用数组存id或者Item
         if ($scope.temp_picList[i].isSelect) {
             $scope.temp_picList[i].isSelect = false;
         } else {
             $scope.temp_picList[i].isSelect = true;
         }
     };
-    $scope.SelectClass = function(i) {
+    $scope.SelectClass = function(i) {       //改 判断id是否在数组里
         if ($scope.temp_picList[i].isSelect) {
             return "material_item_active";
         }
         return;
     };
-    $scope.judge_hasSelect = function(i) {
+    $scope.judge_hasSelect = function(i) {    //改  判断数组长度
         var count = 0;
         $scope.checked_resource[i].picList.map(function(item, i) {
             if (item.isSelect) {
