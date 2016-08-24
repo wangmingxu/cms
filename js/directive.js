@@ -20,7 +20,7 @@ angular.module('starter.directives', [])
               reader.onload = function(e) {
                   material_item.base64=e.target.result;
                   var index=$scope.result.length+1;
-                  var picTitle="图片"+index;
+                  var picTitle=material_item.file.name.replace(".png","").replace(".jpg","").replace(".gif","");
                   material_item.title=picTitle;
                   $scope.result.push(material_item);
                   console.log($scope.result);

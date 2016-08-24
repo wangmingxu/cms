@@ -397,6 +397,8 @@ body {
       color: black; }
     .content #areaModal .modal-body .tab-pane {
       min-height: 200px; }
+    .content #areaModal .modal-body .tab-content > .tab-pane {
+      display: block; }
     .content #areaModal .modal-body .area_name {
       padding: 5px 0;
       text-align: center; }
@@ -404,10 +406,8 @@ body {
       background-color: #E4E4E4;
       color: white;
       font-weight: bold; }
-    .content #areaModal .modal-body #common_used,
     .content #areaModal .modal-body #service_area {
       padding: 20px; }
-      .content #areaModal .modal-body #common_used input,
       .content #areaModal .modal-body #service_area input {
         transform: translateY(2px); }
   .content #areaModal .modal-footer {

@@ -81,15 +81,16 @@
         </tr>
     </tbody>
 </table>
-<!-- <div class="table_footer">
+<div class="table_footer">
     <span class="cur_page_info">当前第 1-15条，共 {{totalSize}} 条，每页显示 <input type="number" name="name" value="" step="5" max="20" min="5" ng-model="pageSize"> 行</span>
     <div class="tab_page">
-        <span class="previous_page">上一页</span>
-        <span class="page_num">1/2</span>
-        <span class="next_page">下一页</span> 向第
+        <span class="previous_page" ng-click="getPicList('prev')" ng-show="cur_pageIndex!==0">上一页</span>
+        <span class="page_num">{{cur_pageIndex+1}}/{{(totalSize/pageSize) | ceil}}</span>
+        <span class="next_page" ng-click="getPicList('next')" ng-show="(cur_pageIndex+1)*pageSize<totalSize">下一页</span> 
+        <!-- 向第
         <input type="text" name="page_num_ipt" value="" width="20"> 页
-        <span class="jump">跳转</span>
+        <span class="jump">跳转</span> -->
     </div>
-</div> -->
+</div>
 </div>
 </div>

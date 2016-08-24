@@ -445,6 +445,9 @@ body {
             .tab-pane {
                 min-height: 200px;
             }
+            .tab-content>.tab-pane{
+              display: block;
+            }
             .area_name {
                 padding: 5px 0;
                 text-align: center;
@@ -454,7 +457,6 @@ body {
                 color: white;
                 font-weight: bold;
             }
-            #common_used,
             #service_area {
                 padding: 20px;
                 input {

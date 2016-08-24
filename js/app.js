@@ -1,5 +1,5 @@
 // angular.module('starter', ['starter.controllers', 'starter.services','starter.directives','starter.filters'])
-angular.module('starter', ['starter.config','ui.router','starter.controllers','starter.directives'])
+angular.module('starter', ['starter.config','ui.router','starter.controllers','starter.directives','starter.filters'])
 
 // .constant('prefix', 'http://localhost/')
 // .constant('prefix', 'http://192.168.17.9:8088/')
@@ -140,6 +140,6 @@ angular.module('starter', ['starter.config','ui.router','starter.controllers','s
                 }
             })
         // if none of the above states are matched, use this as the fallback
-        // $urlRouterProvider.otherwise('/tab/planEntrance');
+        $urlRouterProvider.otherwise('/tab/planEntrance');
 
     });

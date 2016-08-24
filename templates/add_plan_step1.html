@@ -96,22 +96,22 @@
                     <div>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#administration_area" aria-controls="administration_area" role="tab" data-toggle="tab">行政区域</a>
+                                <a href="" aria-controls="administration_area" role="tab" data-toggle="tab" ng-click='tabAdmin()'>行政区域</a>
                             </li>
                             <li role="presentation">
-                                <a href="#service_area" aria-controls="service_area" role="tab" data-toggle="tab">服务区域</a>
+                                <a href="" aria-controls="service_area" role="tab" data-toggle="tab" ng-click='tabService()'>服务区域</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="administration_area">
+                            <div role="tabpanel" class="tab-pane active" id="administration_area" ng-show="inAdminTab">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-2 area_name" ng-repeat="area in administration_area" ng-click="select_item($index)" ng-class="AreaClass($index)">{{ area.provinceName }}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="service_area">
+                            <div role="tabpanel" class="tab-pane" id="service_area" ng-show="inServiceTab">
                                 <ul>
                                 <li ng-repeat="province in service_area">
                                     <label for="{{province.provinceName}}">

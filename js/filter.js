@@ -1,11 +1,8 @@
 angular.module('starter.filters', [])
-//示例
-.filter('topic',function(){
+
+.filter('ceil',function(){
   return function(x){
-    if(x){
-      var topic="#"+x+"#"
-      return topic;
-    }
-    return;
+    var ceil_num=Math.ceil(x);
+    return ceil_num;
   }
 });

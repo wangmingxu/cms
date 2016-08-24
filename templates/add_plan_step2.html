@@ -56,7 +56,7 @@
                     <td class="material_state not_selected" ng-if="!judge_hasSelect($index)">未选素材</td>
                     <td class="material_state" ng-if="judge_hasSelect($index)">已选素材</td>
                     <td class="operate">
-                        <span data-toggle="modal" data-target="#selectPic_Modal" ng-click="show_picList($index)" ng-if="!judge_hasSelect($index)">选择素材</span>
+                        <span data-toggle="modal" data-target="#selectPic_Modal" ng-click="getPic($index)" ng-if="!judge_hasSelect($index)">选择素材</span>
                         <span ng-click="pic_next($index)" ng-if="judge_hasSelect($index)">编辑素材</span>
                         <!-- <span data-toggle="modal" data-target="#selectArticle_Modal" ng-click="getArticle($index)">选择素材</span> -->
                         <span ng-click="del_resource($index)">删除</span>
@@ -66,7 +66,7 @@
         </table>
         <div class="select_finish">
             <button type="button" name="button" class="last_step_btn" ng-click="back()">上一步</button>
-            <button type="button" name="button" class="finish_btn" ng-click="picPlan_finish()">完成</button>
+            <button type="button" name="button" class="finish_btn" ng-disabled="disableFinish()" ng-click="picPlan_finish()">完成</button>
             <button type="button" name="button" class="cancel_btn">取消</button>
         </div>
     </div>
@@ -154,7 +154,7 @@
                     </select>
                     <input type="text" name="name" value="" placeholder="输入素材名称"> -->
                     <div class="well well-lg material_list">
-                        <div class="material_item" ng-repeat="item in temp_picList" ng-click="select_pic($index)" ng-class="SelectClass($index)">
+                        <div class="material_item" ng-repeat="item in temp_picList" ng-click="select_pic(item.materialId,item)" ng-class="SelectClass(item.materialId)">
                             <img ng-src="{{picUrl}}{{item.storageUrl}}" alt=""/>
                             <p class="img_name">
                                 {{item.materialName}}
@@ -164,10 +164,10 @@
                 </div>
                 <div class="modal-footer">
                   <div class="page_tab">
-                      <span>每页显示10行</span>
-                      <a ng-click="prevpage()" ng-show="cur_pageIndex!=0">上一页</a>
-                      <span>{{cur_pageIndex}}/{{totalSize/10}}</span>
-                      <a ng-click="nextpage()" ng-show="(cur_pageIndex+1)*10<totalSize">下一页</a>
+                      <span>每页显示20条</span>
+                      <a ng-click="getPic(temp_resIndex,'prev')" ng-show="cur_pageIndex!==0">上一页</a>
+                      <span>{{cur_pageIndex+1}}/{{(totalSize/pageSize) | ceil}}</span>
+                      <a ng-click="getPic(temp_resIndex,'next')" ng-show="(cur_pageIndex+1)*pageSize<totalSize">下一页</a>
                   </div>
                     <button type="button" class="btn btn-primary" ng-click="pic_next()">下一步
                     </button>
@@ -208,7 +208,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in temp_picList_next">
+                                <tr ng-repeat="item in checked_resource[temp_resIndex].picObjArr">
                                     <td class="pic_title">{{item.materialName}}</td>
                                     <!-- <td class="preview">
                                         <a href="#" data-toggle="popover" data-trigger="hover" data-content="<img src='{{item.storageUrl}}' width='250'>" data-placement="bottom" data-html="true">预览</a>
@@ -219,8 +219,8 @@
                                     <!-- <td class="serial_number">{{$index}}</td> -->
                                     <td class="operate">
                                         <span ng-click="del_SelectPic($index)">删除</span>
-                                        <span ng-click="move_down(temp_picList_next,$index)">下移</span>
-                                        <span ng-click="move_up(temp_picList_next,$index)">上移</span>
+                                        <span ng-click="move_down(checked_resource[temp_resIndex].picObjArr,checked_resource[temp_resIndex].picIdArr,$index)">下移</span>
+                                        <span ng-click="move_up(checked_resource[temp_resIndex].picObjArr,checked_resource[temp_resIndex].picIdArr,$index)">上移</span>
                                     </td>
                                 </tr>
                             </tbody>
